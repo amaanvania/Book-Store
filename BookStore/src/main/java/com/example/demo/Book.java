@@ -2,6 +2,7 @@ package com.example.demo;
 
 public class Book {
 
+	//ID
 	private String id;
 	private String name;
 	private String image; // Image type need to change
