@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.ctrl;
 
 import java.util.List;
 
@@ -18,11 +18,17 @@ public class BookController {
 	JdbcTemplate jdbc;
 
 	@GetMapping("/all")
-	public Book allBooks()
+	public Book[] allBooks()
 	{
 		//	public Book(String id, String name, String image, float price, String category, boolean inStock, int quantity) {
-
-		return new Book("9781234567897", "Harry Potter", "image", 10, "Fiction", true, 5);
+		Book[] books = {
+				new Book("9781234567897", "Harry Potter1", "image", 10, "Fiction", true, 5),
+				new Book("9781234567897", "Harry Potter2", "image", 11, "Fiction", true, 6),
+				new Book("9781234567897", "Harry Potter3", "image", 12, "Fiction", true, 7),
+				new Book("9781234567897", "Harry Potter4", "image", 13, "Fiction", true, 8),
+				new Book("9781234567897", "Harry Potter5", "image", 14, "Fiction", true, 9)
+		};
+		return books;
 	}
 	
 	@GetMapping("/db")
