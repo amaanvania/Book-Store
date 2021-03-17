@@ -1,4 +1,4 @@
-package com.example.demo.ctrl;
+package com.example.demo.beans;
 
 public class Category {
 

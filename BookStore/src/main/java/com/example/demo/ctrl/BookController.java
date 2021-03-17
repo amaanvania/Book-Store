@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.beans.Book;
+import com.example.demo.dao.BookDAO;
+
 @RestController
 @RequestMapping("/book")
 public class BookController {
 
 	@Autowired
-	JdbcTemplate jdbc;
+	BookDAO bd;
 
 	@GetMapping("/all")
 	public Book[] allBooks()
@@ -32,9 +35,9 @@ public class BookController {
 	}
 	
 	@GetMapping("/db")
-	public List<String> dbInfo()
+	public List<Book> dbInfo()
 	{
-		return jdbc.queryForList("SELECT Name FROM city where ID=1;", String.class);
+		return bd.getAllBooks();
 	}
 	
 	

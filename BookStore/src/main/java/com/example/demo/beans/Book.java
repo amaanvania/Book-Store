@@ -1,4 +1,4 @@
-package com.example.demo.ctrl;
+package com.example.demo.beans;
 
 public class Book {
 
@@ -11,7 +11,16 @@ public class Book {
 	private boolean inStock;
 	private int quantity;
 
-	
+	public Book()
+	{
+		this.id = null;
+		this.name = null;
+		this.image = null;
+		this.price = 0;
+		this.category = null;
+		this.inStock = false;
+		this.quantity = 0;
+	}
 	
 	public Book(String id, String name, String image, float price, String category, boolean inStock, int quantity) {
 		super();
