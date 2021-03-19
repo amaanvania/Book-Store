@@ -21,4 +21,25 @@ public class BookDAO {
 		return jdbc.query(query, new BookMapper());
 		
 	}
+	
+	public List<String> getAllCategories()
+	{
+		String query = "SELECT distinct category FROM `4413`.Book;";
+		return jdbc.queryForList(query, String.class);
+	}
+	
+	public Book getBook(String bid)
+	{
+		String query = "SELECT * FROM `4413`.Book where bid='"+bid+"';";
+		return jdbc.queryForObject(query, new BookMapper());
+	}
+	
+	public List<Book> getBooksByCategory(String cat)
+	{
+		String query = "SELECT * FROM `4413`.Book where category='"+cat+"';"; 
+		return jdbc.query(query, new BookMapper());
+	}
+	
+	
+	
 }
