@@ -1,8 +1,9 @@
-package com.example.demo.beans;
+package com.example.demo.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.example.demo.beans.Book;
 import org.springframework.jdbc.core.RowMapper;
 
 public class BookMapper implements RowMapper<Book> {
