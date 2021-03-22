@@ -40,5 +40,24 @@ public class UserService {
 		return "Unable to Create Account";
 	}
 	
+	public String login(User u)
+	{
+		User retrievedUser = null;
+		try {
+			retrievedUser = ud.getUser(u.getUsername());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return "invalid username";
+		}
+		
+		if (u.getPassword().equals(retrievedUser.getPassword()))
+		{
+			return "logged in";
+		}
+		return "invalid password";
+	}
+	
 	
 }
