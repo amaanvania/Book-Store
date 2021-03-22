@@ -33,7 +33,7 @@ public class BookController {
 
 
 	/* UNTESTED */
-	@PostMapping("/insert")
+	@PostMapping(path="/insert", consumes = "application/json")
 	public void insertBook(@RequestBody Book book) throws SQLException {
 		bd.insertBook(book);
 	}
