@@ -21,7 +21,8 @@ public class Book {
 		this.inStock = false;
 		this.quantity = 0;
 	}
-	
+
+
 	public Book(String id, String name, String image, float price, String category, boolean inStock, int quantity) {
 		super();
 		this.id = id;
@@ -32,6 +33,18 @@ public class Book {
 		this.inStock = inStock;
 		this.quantity = quantity;
 	}
+
+	public Book(String id, String name, String image, float price, String category, boolean inStock) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.image = image;
+		this.price = price;
+		this.category = category;
+		this.inStock = inStock;
+		this.quantity = 0;
+	}
+
 	public String getId() {
 		return id;
 	}
