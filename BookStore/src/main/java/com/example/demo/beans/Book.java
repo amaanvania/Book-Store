@@ -15,7 +15,7 @@ public class Book {
 	{
 		this.id = null;
 		this.name = null;
-		this.image = null;
+		this.image = "https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=405&h=540&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2016%2F09%2Fhpsorcstone.jpg";
 		this.price = 0;
 		this.category = null;
 		this.inStock = false;
