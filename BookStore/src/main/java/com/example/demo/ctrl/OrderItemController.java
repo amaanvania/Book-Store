@@ -13,31 +13,31 @@ import java.util.List;
 public class OrderItemController {
 
     @Autowired
-    ProductOrderItemDAO productOrderDAO;
+    ProductOrderItemDAO productOrderItemDAO;
 
 
     @GetMapping("/all")
     public List<ProductOrderItem> allProductOrderItems()
     {
-        return productOrderDAO.getAllProductOrderItems();
+        return productOrderItemDAO.getAllProductOrderItems();
     }
 
     @GetMapping("/{id}")
     public ProductOrderItem getProductOrderItem(@PathVariable int id)
     {
-        return productOrderDAO.getProductOrderItem(id);
+        return productOrderItemDAO.getProductOrderItem(id);
     }
 
 
     /* UNTESTED */
     @PostMapping(path="/insert", consumes = "application/json")
     public void insertProductOrderItemItem(@RequestBody ProductOrderItem item) throws SQLException {
-        productOrderDAO.insertProductOrderItem(item);
+        productOrderItemDAO.insertProductOrderItem(item);
     }
 
     /* WORKS */
     @DeleteMapping("/{id}")
     public void removeProductOrderItem(@PathVariable int id) throws SQLException {
-        productOrderDAO.removeProductOrderItem(id);
+        productOrderItemDAO.removeProductOrderItem(id);
     }
 }
