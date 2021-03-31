@@ -19,20 +19,20 @@ public class BookDAO {
 	
 	public List<Book> getAllBooks()
 	{
-		String query = "SELECT * FROM `4413`.Book;";
+		String query = "SELECT * FROM `4413`.book;";
 		return jdbc.query(query, new BookMapper());
 		
 	}
 	
 	public List<String> getAllCategories()
 	{
-		String query = "SELECT distinct category FROM `4413`.Book;";
+		String query = "SELECT distinct category FROM `4413`.book;";
 		return jdbc.queryForList(query, String.class);
 	}
 	
 	public Book getBook(String bid)
 	{
-		String query = "SELECT * FROM `4413`.Book where bid='"+bid+"';";
+		String query = "SELECT * FROM `4413`.book where bid='"+bid+"';";
 		return jdbc.queryForObject(query, new BookMapper());
 	}
 	
@@ -43,7 +43,7 @@ public class BookDAO {
 	}
 
 	public void insertBook(Book book) throws SQLException {
-		String strSelect  = "INSERT INTO Book (bid, title, price, category) VALUES (?, ?, ?, ?);";
+		String strSelect  = "INSERT INTO book (bid, title, price, category) VALUES (?, ?, ?, ?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
 		preparedStatement.setString(1, book.getId());
 		preparedStatement.setString(2, book.getName());
@@ -54,7 +54,7 @@ public class BookDAO {
 	}
 
 	public void removeBook(String bookId) throws SQLException {
-		String query = "DELETE FROM Book WHERE (`bid` = ?);";
+		String query = "DELETE FROM book WHERE (`bid` = ?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
 		preparedStatement.setString(1,bookId);
 		preparedStatement.execute();
