@@ -31,6 +31,11 @@ public class BookController {
 		return bd.getBook(bid);
 	}
 
+	@GetMapping("/keyword/")
+	public List<Book> getBooksEmptyKeyword(){
+		return bd.getAllBooks();
+	}
+
 	@GetMapping("/keyword/{keyword}")
 	public List<Book> getBookByKeyword(@PathVariable String keyword){
 		return bd.getBooksByKeyword(keyword);

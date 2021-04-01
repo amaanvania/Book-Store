@@ -29,9 +29,11 @@ public class BookDAO {
 	{
 		String query = "SELECT * FROM `4413`.book;";
 		List<Book> books = jdbc.query(query, new BookMapper());
+		if(keyword == null) return books;
 		List<Book> result = new ArrayList<>();
+		String lowercaseFormatted = keyword.toLowerCase().replace("+"," ");
 		for(Book b : books){
-			if(b.getName().contains(keyword))
+			if(b.getName().toLowerCase().contains(lowercaseFormatted))
 				result.add(b);
 		}
 
