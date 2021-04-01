@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,20 @@ public class BookDAO {
 		String query = "SELECT * FROM `4413`.book;";
 		return jdbc.query(query, new BookMapper());
 		
+	}
+
+	public List<Book> getBooksByKeyword(String keyword)
+	{
+		String query = "SELECT * FROM `4413`.book;";
+		List<Book> books = jdbc.query(query, new BookMapper());
+		List<Book> result = new ArrayList<>();
+		for(Book b : books){
+			if(b.getName().contains(keyword))
+				result.add(b);
+		}
+
+		return result;
+
 	}
 	
 	public List<String> getAllCategories()

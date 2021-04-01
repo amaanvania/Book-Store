@@ -31,7 +31,10 @@ public class BookController {
 		return bd.getBook(bid);
 	}
 
-
+	@GetMapping("/keyword/{keyword}")
+	public List<Book> getBookByKeyword(@PathVariable String keyword){
+		return bd.getBooksByKeyword(keyword);
+	}
 	/* UNTESTED */
 	@PostMapping(path="/insert", consumes = "application/json")
 	public void insertBook(@RequestBody Book book) throws SQLException {
