@@ -20,12 +20,12 @@ public class UserDAO {
 	
 	public User getUser(String username) throws Exception
 	{
-		String query = "SELECT * FROM `4413`.User where username='"+username+"';";
+		String query = "SELECT * FROM `4413`.user where username='"+username+"';";
 		return jdbc.queryForObject(query, new UserMapper());
 	}
 	
 	public int insert(User user) throws SQLException {
-		String strSelect  = "INSERT INTO User (address,fname,lname,username,pw) VALUES (?, ?, ?, ?, ?);";
+		String strSelect  = "INSERT INTO user (address,fname,lname,username,pw) VALUES (?, ?, ?, ?, ?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
 		preparedStatement.setInt(1, user.getAddress());
 		preparedStatement.setString(2, user.getFname());

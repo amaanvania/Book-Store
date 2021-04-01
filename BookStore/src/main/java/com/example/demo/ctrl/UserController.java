@@ -15,6 +15,11 @@ public class UserController {
 	@Autowired
 	UserService us;
 	
+	@GetMapping("/{username}")
+	public User getUser(@PathVariable String username)
+	{
+		return us.getUserInfo(username);
+	}
 	
 	@PostMapping(path="/register", consumes = "application/json")
 	public String register(@RequestBody User user)

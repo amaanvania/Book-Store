@@ -13,6 +13,19 @@ public class UserService {
 	@Autowired
 	UserDAO ud;
 	
+	public User getUserInfo(String username)
+	{
+		User u = null;
+		try {
+			u = ud.getUser(username);
+			u.setPassword(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		return u;
+	}
+	
 	
 	public String registerUser(User u)
 	{
