@@ -60,7 +60,7 @@ public class BookDAO {
 	}
 
 	public void insertBook(Book book) throws SQLException {
-		String strSelect  = "INSERT INTO book (bid, title, price, category,quantity) VALUES (?, ?, ?, ?,?);";
+		String strSelect  = "INSERT INTO book (bid, title, price, category, quantity) VALUES (?, ?, ?, ?,?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
 		preparedStatement.setString(1, book.getId());
 		preparedStatement.setString(2, book.getName());

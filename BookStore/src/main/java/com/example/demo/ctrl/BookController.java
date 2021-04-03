@@ -37,7 +37,7 @@ public class BookController {
 	}
 
 	@GetMapping("/keyword/{keyword}")
-	public List<Book> getBookByKeyword(@PathVariable String keyword){
+	public List<Book> getBooksByKeyword(@PathVariable String keyword){
 		return bd.getBooksByKeyword(keyword);
 	}
 	/* UNTESTED */

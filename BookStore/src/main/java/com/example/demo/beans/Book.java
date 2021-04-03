@@ -8,7 +8,6 @@ public class Book {
 	private String image; // Image type need to change
 	private float price;
 	private String category;
-	private boolean inStock;
 	private int quantity;
 
 	public Book()
@@ -18,30 +17,27 @@ public class Book {
 		this.image = "https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=405&h=540&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2016%2F09%2Fhpsorcstone.jpg";
 		this.price = 0;
 		this.category = null;
-		this.inStock = false;
 		this.quantity = 0;
 	}
 
 
-	public Book(String id, String name, String image, float price, String category, boolean inStock, int quantity) {
+	public Book(String id, String name, String image, float price, String category, int quantity) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
 		this.price = price;
 		this.category = category;
-		this.inStock = inStock;
 		this.quantity = quantity;
 	}
 
-	public Book(String id, String name, String image, float price, String category, boolean inStock) {
+	public Book(String id, String name, String image, float price, String category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
 		this.price = price;
 		this.category = category;
-		this.inStock = inStock;
 		this.quantity = 0;
 	}
 
@@ -74,12 +70,6 @@ public class Book {
 	}
 	public void setCategory(String category) {
 		this.category = category;
-	}
-	public boolean isInStock() {
-		return inStock;
-	}
-	public void setInStock(boolean inStock) {
-		this.inStock = inStock;
 	}
 	public int getQuantity() {
 		return quantity;
