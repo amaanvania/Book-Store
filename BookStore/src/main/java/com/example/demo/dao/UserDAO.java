@@ -21,7 +21,9 @@ public class UserDAO {
 	public User getUser(String username) throws Exception
 	{
 		String query = "SELECT * FROM `4413`.user where username='"+username+"';";
-		return jdbc.queryForObject(query, new UserMapper());
+		List<User> users =  jdbc.query(query, new UserMapper());
+		if(users.size() == 0) return null;
+		return users.get(0);
 	}
 	
 	public int insert(User user) throws SQLException {
