@@ -2,9 +2,12 @@ package com.example.demo.ctrl;
 
 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.beans.User;
+import com.example.demo.beans.UserAddress;
 import com.example.demo.service.UserService;
 
 
@@ -16,15 +19,15 @@ public class UserController {
 	UserService us;
 	
 	@GetMapping("/{username}")
-	public User getUser(@PathVariable String username)
+	public UserAddress getUser(@PathVariable String username)
 	{
 		return us.getUserInfo(username);
 	}
 	
 	@PostMapping(path="/register", consumes = "application/json")
-	public String register(@RequestBody User user)
+	public String register(@RequestBody UserAddress ud)
 	{
-		return us.registerUser(user);
+		return us.registerUser(ud);
 	}
 	
 	@PostMapping(path="/login", consumes = "application/json")

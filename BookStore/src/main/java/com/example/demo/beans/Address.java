@@ -4,14 +4,27 @@ public class Address {
 
     int id;
     String street;
+    String city;
     String province;
     String country;
     String zip;
     String phone;
 
-    public Address(int id, String street, String province, String country, String zip, String phone) {
+    
+    public Address() {
+    	 this.id = 0;
+         this.street = null;
+         this.city = null;
+         this.province = null;
+         this.country = null;
+         this.zip = null;
+         this.phone = null;
+	}
+
+	public Address(int id, String street,String city, String province, String country, String zip, String phone) {
         this.id = id;
         this.street = street;
+        this.city = city;
         this.province = province;
         this.country = country;
         this.zip = zip;
@@ -34,6 +47,16 @@ public class Address {
         this.street = street;
     }
 
+    public void setCity(String city)
+    {
+    	this.city = city;
+    }
+    
+    public String getCity()
+    {
+    	return this.city;
+    }
+    
     public String getProvince() {
         return province;
     }

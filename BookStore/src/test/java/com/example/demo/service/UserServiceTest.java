@@ -7,16 +7,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.example.demo.beans.Address;
 import com.example.demo.beans.User;
+import com.example.demo.beans.UserAddress;
+import com.example.demo.dao.AddressDAO;
 import com.example.demo.dao.UserDAO;
 import com.example.demo.service.UserService;
 import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {UserService.class})
-
+//@SpringBootTest
 public class UserServiceTest {
 
 	
@@ -26,23 +30,28 @@ public class UserServiceTest {
 	@MockBean
 	private UserDAO ud;
 	
+	@MockBean AddressDAO ad;
+
+	
 	User u1;
 	User u2;
 	User u3;
+	Address ad1;
 	@Before
 	public void setUp()
 	{
 		u1 = new User(1, 1, "John", "Doe", "johndoe", "password123");
 		u2 = new User(1, 1, "John", "Doe", "johndoe", "password1234");
 		u3 = new User(1, 1, "John", "Doe", "johndoe2", "password1234");
-
+		//int id, String street,String city, String province, String country, String zip, String phone
+		ad1 = new Address(0,"street","city","ON","Canada","f3f0c","90944235934");
 	}
 	// invalid register
 	@Test
 	public void testRegisterUser1() throws Exception {
 		//User(int id, int address, String fname, String lname, String username, String password) {
 		Mockito.when(ud.getUser(u1.getUsername())).thenReturn(u1);
-		assertTrue(service.registerUser(u1).equals("Unable to Create Account"));
+		assertTrue(service.registerUser(new UserAddress(u1,ad1)).equals("Unable to Create Account"));
 		
 	}
 	// valid register
@@ -51,7 +60,7 @@ public class UserServiceTest {
 		//User(int id, int address, String fname, String lname, String username, String password) {
 		Mockito.when(ud.getUser(u1.getUsername())).thenThrow(new Exception());
 		Mockito.when(ud.insert(u1)).thenReturn(1);
-		assertTrue(service.registerUser(u1).equals("Created"));
+		assertTrue(service.registerUser(new UserAddress(u1,ad1)).equals("Created"));
 		
 	}
 	// valid login
