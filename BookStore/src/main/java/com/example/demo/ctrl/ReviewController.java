@@ -43,7 +43,7 @@ public class ReviewController {
     public void removeReview(@PathVariable int id) throws SQLException {
         Review curr = rd.getReview(id);
         if(curr == null) return;
-        
+
         rd.removeReview(id);
         rts.decrementBooksRating(curr.getBook_id(),curr.getRating());
 

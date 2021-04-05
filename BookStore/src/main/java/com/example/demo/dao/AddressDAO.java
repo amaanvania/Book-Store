@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,10 +19,13 @@ public class AddressDAO {
 	// get address given address id. stored with user
 	public Address getAddress(int addressId)
 	{
-		String query = "SELECT * FROM `4413`.Address where id="+addressId;
-		return jdbc.queryForObject(query, new AddressMapper());
+		String query = "SELECT * FROM `4413`.Address where id='"+addressId+"';";
+		List<Address> list = jdbc.query(query, new AddressMapper());
+		if(list.size() ==0) return null;
+		return list.get(0);
 	}
-	
+
+
 	// return the address id
 	public int insertAddress(Address address) throws SQLException
 	{

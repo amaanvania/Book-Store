@@ -25,6 +25,12 @@ public class UserDAO {
 		if(users.size() == 0) return null;
 		return users.get(0);
 	}
+
+	public boolean userExists(String username){
+		String query = "SELECT * FROM `4413`.user where username='"+username+"';";
+		List<User> users =  jdbc.query(query, new UserMapper());
+		return users.size() > 0;
+	}
 	
 	public int insert(User user) throws SQLException {
 		String strSelect  = "INSERT INTO user (address,fname,lname,username,pw) VALUES (?, ?, ?, ?, ?);";
@@ -36,6 +42,7 @@ public class UserDAO {
 		preparedStatement.setString(5, user.getPassword());
 
 		int response =  preparedStatement.executeUpdate();
+		System.out.println(response);
 		return response;
 	} 
 	
