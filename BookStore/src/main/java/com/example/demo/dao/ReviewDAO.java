@@ -36,7 +36,7 @@ public class ReviewDAO {
 
 
 
-    public void insertReview(Review productOrder) throws SQLException {
+    public boolean insertReview(Review productOrder) throws SQLException {
         String strSelect  = "INSERT INTO Review (review_id, book_id, review, rating, user_id, date_time) VALUES (?, ?, ?, ?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
         preparedStatement.setInt(1, productOrder.getReview_id());
@@ -45,14 +45,17 @@ public class ReviewDAO {
         preparedStatement.setDouble(4, productOrder.getRating());
         preparedStatement.setInt(5, productOrder.getUser_id());
         preparedStatement.setString(6, new Date().toString());
-        preparedStatement.executeUpdate();
+        return preparedStatement.execute();
 
     }
 
-    public void removeReview(int productOrderId) throws SQLException {
+    public boolean removeReview(int productOrderId) throws SQLException {
         String query = "DELETE FROM Review WHERE (`id` = ?);";
+        Review curr = getReview(productOrderId);
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
         preparedStatement.setInt(1,productOrderId);
-        preparedStatement.execute();
+
+        return preparedStatement.execute();
+
     }
 }

@@ -54,17 +54,18 @@ public class ReviewTrackerDAO {
         preparedStatement.execute();
     }
 
-    public boolean updateReviewTracker(String bookID, ReviewTracker newReviewTracker) throws SQLException {
-        if(!bookID.equals(newReviewTracker.getBid())) return false;
+    public void updateReviewTracker(String bookID, ReviewTracker newReviewTracker) throws SQLException {
+        if(!bookID.equals(newReviewTracker.getBid())) return;
 
 
-        String query = "UPDATE `4413`.`ReviewTracker` SET `rating` = '?', `num_reviews` = '?' WHERE (`book_id` = '?');";
+        String query = "UPDATE `4413`.`ReviewTracker` SET `rating` = ?, `num_reviews` = ? WHERE (`book_id` = ?);";
+
 
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
         preparedStatement.setDouble(1,newReviewTracker.getRating());
         preparedStatement.setInt(2,newReviewTracker.getNumReviews());
         preparedStatement.setString(3,newReviewTracker.getBid());
-        return preparedStatement.execute();
+        preparedStatement.executeUpdate();
 
 
     }

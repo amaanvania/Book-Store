@@ -13,18 +13,34 @@ public class ReviewTrackerService {
     @Autowired
     ReviewTrackerDAO rtd;
 
-    public boolean updateBooksRating(String bid, double rating) throws SQLException {
+    public void updateBooksRating(String bid, double rating) throws SQLException {
         ReviewTracker old = rtd.getReviewTracker(bid);
 
-        if(old == null) return false;
+        if(rating < 1 || rating > 5) return;
+        if(old == null) return;
 
         double oldRating = old.getRating();
         int oldNumReviews = old.getNumReviews();
 
-        int newReviews = oldNumReviews++;
-
+        int newReviews = oldNumReviews + 1;
         double newRating = (oldRating + rating) / newReviews;
+        System.out.println(newRating);
+        rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
+    }
 
-        return rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
+    public void decrementBooksRating(String bid, double rating) throws SQLException {
+        ReviewTracker old = rtd.getReviewTracker(bid);
+
+        if(rating < 1 || rating > 5) return;
+        if(old == null) return;
+
+        double oldRating = old.getRating();
+        int oldNumReviews = old.getNumReviews();
+
+        int newReviews = oldNumReviews--;
+
+        double newRating = ((oldRating * oldNumReviews) - rating) / newReviews;
+
+        rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
     }
 }
