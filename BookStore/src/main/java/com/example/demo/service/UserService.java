@@ -1,17 +1,14 @@
 package com.example.demo.service;
 
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.example.demo.beans.Address;
 import com.example.demo.beans.User;
 import com.example.demo.beans.UserAddress;
 import com.example.demo.dao.AddressDAO;
 import com.example.demo.dao.UserDAO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
 
 @Service
 public class UserService {

@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -31,6 +33,38 @@ public class ProductOrderItemDAO {
         List<ProductOrderItem> list =  jdbc.query(query, new ProductOrderItemMapper());
         if(list.size() == 0) return null;
         return list.get(0);
+    }
+
+    public List<ProductOrderItem> getTopTenSoldBooks(){
+        String query = "SELECT o1.bid, SUM(o1.quantity) FROM `4413`.POItem o1 GROUP BY o1.bid ORDER BY SUM(o1.quantity) DESC LIMIT 10;";
+        List<ProductOrderItem> list =  jdbc.query(query, new ProductOrderItemMapper());
+        if(list.size() == 0) return null;
+        return list;
+
+    }
+
+    public List<ProductOrderItem> getSortedBooksByMonth(int month) throws SQLException {
+        String query = "SELECT o1.bid, SUM(o1.quantity) " +
+                "FROM `4413`.POItem o1 join `4413`.PO p1 " +
+                "where o1.po_id = p1.id and month(p1.date) = ?" +
+                "GROUP BY o1.bid " +
+                "ORDER BY SUM(o1.quantity) " +
+                "DESC LIMIT 10;";
+
+        PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
+
+        preparedStatement.setInt(1,month);
+
+        List<ProductOrderItem> items = new ArrayList<>();
+        ProductOrderItemMapper p = new ProductOrderItemMapper();
+        ResultSet results = preparedStatement.executeQuery();
+        int row = 0;
+        while(results.next())
+            items.add(p.mapRow(results,++row));
+
+        return items;
+
+
     }
 
 
