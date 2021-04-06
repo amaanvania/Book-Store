@@ -70,9 +70,9 @@ public class ProductOrderItemDAO {
 
 
     public void insertProductOrderItem(ProductOrderItem productOrder) throws SQLException {
-        String strSelect  = "INSERT INTO POItem (id, bid, quantity,po_id) VALUES (?, ?, ?,?);";
+        String strSelect  = "INSERT INTO POItem (bid, quantity,po_id) VALUES (?, ?,?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
-        preparedStatement.setInt(1, productOrder.getId());
+        //preparedStatement.setInt(1, productOrder.getId());
         preparedStatement.setString(2, productOrder.getBook_id());
         preparedStatement.setInt(3, productOrder.getQuantity());
         preparedStatement.setInt(4, productOrder.getPo_id());

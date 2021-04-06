@@ -31,15 +31,6 @@ public class Book {
 		this.quantity = quantity;
 	}
 
-	public Book(String id, String name, String image, float price, String category) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.image = image;
-		this.price = price;
-		this.category = category;
-		this.quantity = 0;
-	}
 
 	public String getId() {
 		return id;
