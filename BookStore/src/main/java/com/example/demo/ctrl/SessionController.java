@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.beans.CartItem;
+import com.example.demo.beans.Payment;
 import com.example.demo.beans.SessionItem;
 import com.example.demo.service.SessionService;
 
@@ -52,8 +53,8 @@ public class SessionController {
 	    }
 	    
 	    @PostMapping("/checkout")
-	    public void checkout(HttpServletRequest request)
+	    public String checkout(@RequestBody Payment item, HttpServletRequest request)
 	    {
-	    	
+	    	return ss.checkout(item, request);
 	    }
 }
