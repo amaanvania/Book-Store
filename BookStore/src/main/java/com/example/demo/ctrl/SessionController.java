@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,10 +39,10 @@ public class SessionController {
 	    	//return item;
 	    }
 	    
-	    @PostMapping("/delete")
-	    public List<SessionItem> deleteItem(@RequestBody CartItem item, HttpServletRequest request)
+	    @DeleteMapping("/delete")
+	    public List<SessionItem> deleteItem(@RequestBody CartItem bookID, HttpServletRequest request)
 	    {
-	    	return ss.removeItem(item, request);
+	    	return ss.removeItem(bookID, request);
 	    }
 	    
 	    @PostMapping("/updateQuantity")
