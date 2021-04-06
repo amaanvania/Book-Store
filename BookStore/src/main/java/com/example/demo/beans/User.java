@@ -1,6 +1,7 @@
 package com.example.demo.beans;
 
-public class User {
+
+public class User{
 
     int id;
     int address;
@@ -9,6 +10,8 @@ public class User {
     String username;
     String password;
 
+    boolean enabled;
+
     public User(int id, int address, String fname, String lname, String username, String password) {
         this.id = id;
         this.address = address;
@@ -16,6 +19,7 @@ public class User {
         this.lname = lname;
         this.username = username;
         this.password = password;
+        enabled = true;
     }
 
 
@@ -65,5 +69,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

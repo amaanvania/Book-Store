@@ -43,4 +43,19 @@ public class ReviewTrackerService {
 
         rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
     }
+
+    public void updateBooksRatingEdit(String bid, double rating) throws SQLException {
+        ReviewTracker old = rtd.getReviewTracker(bid);
+
+        if(rating < 1 || rating > 5) return;
+        if(old == null) return;
+
+        double oldRating = old.getRating();
+
+
+
+        double newRating = ((oldRating * old.getNumReviews()) + (rating - old.getRating())) / (old.getNumReviews());
+
+        rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,old.getNumReviews()));
+    }
 }

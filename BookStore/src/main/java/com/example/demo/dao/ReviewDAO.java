@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.beans.Review;
+import com.example.demo.beans.ReviewTracker;
 import com.example.demo.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,8 +35,27 @@ public class ReviewDAO {
         return list.get(0);
     }
 
+    public List<Review> getReviewsUnderBook(String bid){
+        String query = "SELECT * FROM `4413`.Review where book_id='"+bid+"';";
+        return jdbc.query(query, new ReviewMapper());
+    }
 
 
+    public void updateReview(int reviewID, Review newReview) throws SQLException {
+        if(reviewID != newReview.getReview_id()) return;
+
+
+        String query = "UPDATE `4413`.`Review` SET `review` = ?, `rating` = ?, `date_time` = ? WHERE (`id` = ?);";
+
+
+        PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
+        preparedStatement.setString(1,newReview.getReview());
+        preparedStatement.setDouble(2, newReview.getRating());
+        preparedStatement.setTimestamp(3,newReview.getDate_time());
+        preparedStatement.executeUpdate();
+
+
+    }
     public boolean insertReview(Review productOrder) throws SQLException {
         String strSelect  = "INSERT INTO Review (review_id, book_id, review, rating, user_id, date_time) VALUES (?, ?, ?, ?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);

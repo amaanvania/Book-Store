@@ -27,6 +27,7 @@ public class UserController {
 	@PostMapping(path="/register", consumes = "application/json")
 	public String register(@RequestBody UserAddress ud)
 	{
+		System.out.println("Received register request");
 		return us.registerUser(ud);
 	}
 	

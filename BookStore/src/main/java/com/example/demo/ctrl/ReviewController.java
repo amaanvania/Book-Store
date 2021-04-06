@@ -38,6 +38,14 @@ public class ReviewController {
 
     }
 
+    @PostMapping(path="/edit", consumes = "application/json")
+    public void editReview(@RequestBody Review item) throws SQLException {
+        if(rd.getReview(item.getReview_id()) == null) return;
+
+        rd.updateReview(item.getReview_id(),item);
+        rts.updateBooksRatingEdit(item.getBook_id(),item.getRating());
+
+    }
     /* WORKS */
     @DeleteMapping("/{id}")
     public void removeReview(@PathVariable int id) throws SQLException {

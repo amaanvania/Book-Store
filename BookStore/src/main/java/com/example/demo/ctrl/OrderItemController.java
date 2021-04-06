@@ -28,6 +28,12 @@ public class OrderItemController {
         return productOrderItemDAO.getProductOrderItem(id);
     }
 
+    @GetMapping("/get/{id}")
+    public ProductOrderItem getProductOrderItemPartner(@PathVariable int id)
+    {
+        return productOrderItemDAO.getProductOrderItem(id);
+    }
+
 
     /* UNTESTED */
     @PostMapping(path="/insert", consumes = "application/json")
