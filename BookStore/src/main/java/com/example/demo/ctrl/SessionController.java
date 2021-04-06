@@ -50,4 +50,10 @@ public class SessionController {
 	    {
 	    	return ss.updateItemQuantity(item, request);
 	    }
+	    
+	    @PostMapping("/checkout")
+	    public void checkout(HttpServletRequest request)
+	    {
+	    	
+	    }
 }
