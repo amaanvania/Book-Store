@@ -83,6 +83,7 @@ public class UserService {
             return "invalid username";
         }
 
+        if(retrievedUser == null) return "invalid username";
         if(pe.matches(u.getPassword(),retrievedUser.getPassword())) return "logged in";
 
        // if (u.getPassword().equals(retrievedUser.getPassword())) {
