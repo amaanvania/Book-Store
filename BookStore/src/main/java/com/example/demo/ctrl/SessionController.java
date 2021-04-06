@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.beans.CartItem;
+import com.example.demo.beans.SessionItem;
 import com.example.demo.service.SessionService;
 
 @RestController
@@ -21,28 +22,30 @@ public class SessionController {
 		SessionService ss;
 		
 	 	@GetMapping("/")
-	    public List<CartItem> index(Model model, HttpSession session) {
+	    public List<SessionItem> index(Model model, HttpSession session) {
 	        return ss.index(model, session);
 	    }
 	 	
 	 	@GetMapping("/cart")
-	    private List<CartItem> getCart(HttpSession session) {
-	        return ss.getCart(session);
+	    private List<SessionItem> getCart(HttpSession session) {
+	        return ss.convertCartToSessionItem(ss.getCart(session));
+	 		
 	    }
 	 	
 	    @PostMapping("/addToCart")
-	    public List<CartItem> addToCart (@RequestBody CartItem item, HttpServletRequest request) {
+	    public List<SessionItem> addToCart (@RequestBody CartItem item, HttpServletRequest request) {
 	        return ss.addToCart(item, request);
+	    	//return item;
 	    }
 	    
 	    @PostMapping("/delete")
-	    public List<CartItem> deleteItem(@RequestBody CartItem item, HttpServletRequest request)
+	    public List<SessionItem> deleteItem(@RequestBody CartItem item, HttpServletRequest request)
 	    {
 	    	return ss.removeItem(item, request);
 	    }
 	    
 	    @PostMapping("/updateQuantity")
-	    public List<CartItem> updateItemQuantity(@RequestBody CartItem item, HttpServletRequest request)
+	    public List<SessionItem> updateItemQuantity(@RequestBody CartItem item, HttpServletRequest request)
 	    {
 	    	return ss.updateItemQuantity(item, request);
 	    }
