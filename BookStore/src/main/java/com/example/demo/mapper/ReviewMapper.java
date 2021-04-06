@@ -16,7 +16,7 @@ public class ReviewMapper implements RowMapper<Review> {
         r.setBook_id(rs.getString("book_id"));
         r.setRating(rs.getFloat("rating"));
         r.setUser_id(rs.getInt("user_id"));
-        r.setDate_time(rs.getString("date_time"));
+        r.setDate_time(rs.getTimestamp("date_time"));
         return r;
     }
 }

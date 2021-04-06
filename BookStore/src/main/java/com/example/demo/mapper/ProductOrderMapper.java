@@ -15,6 +15,8 @@ public class ProductOrderMapper implements RowMapper<ProductOrder> {
         p.setId(rs.getInt("id"));
         p.setStatus(rs.getString("status"));
         p.setUser_id(rs.getInt("user_id"));
+        p.setDate_time(rs.getTimestamp("date_time"));
+        p.setTotal_price(rs.getDouble("total_price"));
         return p;
     }
 }

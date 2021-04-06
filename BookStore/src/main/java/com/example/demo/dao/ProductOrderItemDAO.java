@@ -43,10 +43,10 @@ public class ProductOrderItemDAO {
 
     }
 
-    public List<ProductOrderItem> getSortedBooksByMonth(int month) throws SQLException {
+    public List<ProductOrderItem> getSortedBooksByMonth(int month, int year) throws SQLException {
         String query = "SELECT o1.bid, SUM(o1.quantity) " +
                 "FROM `4413`.POItem o1 join `4413`.PO p1 " +
-                "where o1.po_id = p1.id and month(p1.date) = ?" +
+                "where o1.po_id = p1.id and month(p1.date_time) = ? and year(p1.date_time) = ?" +
                 "GROUP BY o1.bid " +
                 "ORDER BY SUM(o1.quantity) " +
                 "DESC LIMIT 10;";
@@ -70,12 +70,12 @@ public class ProductOrderItemDAO {
 
 
     public void insertProductOrderItem(ProductOrderItem productOrder) throws SQLException {
-        String strSelect  = "INSERT INTO POItem (bid, quantity,po_id) VALUES (?, ?,?);";
+        String strSelect  = "INSERT INTO POItem (bid, quantity,po_id) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
         //preparedStatement.setInt(1, productOrder.getId());
-        preparedStatement.setString(2, productOrder.getBook_id());
-        preparedStatement.setInt(3, productOrder.getQuantity());
-        preparedStatement.setInt(4, productOrder.getPo_id());
+        preparedStatement.setString(1, productOrder.getBook_id());
+        preparedStatement.setInt(2, productOrder.getQuantity());
+        preparedStatement.setInt(3, productOrder.getPo_id());
         preparedStatement.executeUpdate();
 
     }

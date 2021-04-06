@@ -1,5 +1,8 @@
 package com.example.demo.beans;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class ProductOrder {
 
     int id;
@@ -8,15 +11,36 @@ public class ProductOrder {
 
     int user_id;
 
+    Timestamp date_time;
+
+    double total_price;
+
     public ProductOrder(){
 
     }
-    public ProductOrder(int id, String status, int user_id) {
+    public ProductOrder(int id, String status, int user_id, Timestamp date_time, double total_price) {
         this.id = id;
         this.status = status;
         this.user_id = user_id;
+        this.date_time = date_time;
+        this.total_price = total_price;
     }
 
+    public Timestamp getDate_time() {
+        return date_time;
+    }
+
+    public void setDate_time(Timestamp date_time) {
+        this.date_time = date_time;
+    }
+
+    public double getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(double total_price) {
+        this.total_price = total_price;
+    }
 
     public int getId() {
         return id;

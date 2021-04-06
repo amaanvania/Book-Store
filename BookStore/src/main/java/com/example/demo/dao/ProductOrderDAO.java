@@ -35,11 +35,13 @@ public class ProductOrderDAO {
 
 
     public void insertProductOrder(ProductOrder productOrder) throws SQLException {
-        String strSelect  = "INSERT INTO PO (status, user_id) VALUES (?, ?);";
+        String strSelect  = "INSERT INTO PO (status, user_id, date_time, total_price) VALUES (?, ?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
        // preparedStatement.setInt(1, productOrder.getId());
-        preparedStatement.setString(2, productOrder.getStatus());
-        preparedStatement.setInt(3, productOrder.getUser_id());
+        preparedStatement.setString(1, productOrder.getStatus());
+        preparedStatement.setInt(2, productOrder.getUser_id());
+        preparedStatement.setTimestamp(3, productOrder.getDate_time());
+        preparedStatement.setDouble(4,productOrder.getTotal_price());
         preparedStatement.executeUpdate();
 
     }

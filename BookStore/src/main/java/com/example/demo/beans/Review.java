@@ -1,5 +1,7 @@
 package com.example.demo.beans;
 
+import java.sql.Timestamp;
+
 public class Review {
 
     int review_id;
@@ -12,13 +14,13 @@ public class Review {
 
     int user_id;
 
-    String date_time;
+    Timestamp date_time;
 
     public Review(){
 
     }
 
-    public Review(int review_id, String book_id, String review, double rating, int user_id, String date_time) {
+    public Review(int review_id, String book_id, String review, double rating, int user_id, Timestamp date_time) {
         this.review_id = review_id;
         this.book_id = book_id;
         this.review = review;
@@ -68,11 +70,11 @@ public class Review {
         this.user_id = user_id;
     }
 
-    public String getDate_time() {
+    public Timestamp getDate_time() {
         return date_time;
     }
 
-    public void setDate_time(String date_time) {
+    public void setDate_time(Timestamp date_time) {
         this.date_time = date_time;
     }
 }

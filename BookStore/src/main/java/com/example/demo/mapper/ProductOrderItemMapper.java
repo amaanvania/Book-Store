@@ -16,6 +16,7 @@ public ProductOrderItem mapRow(ResultSet rs, int rowNum) throws SQLException {
         p.setBook_id(rs.getString("bid"));
         p.setPo_id(rs.getInt("po_id"));
         p.setQuantity(rs.getInt("quantity"));
+
         return p;
     }
 }

@@ -44,14 +44,13 @@ public class ReviewDAO {
         preparedStatement.setString(3, productOrder.getReview());
         preparedStatement.setDouble(4, productOrder.getRating());
         preparedStatement.setInt(5, productOrder.getUser_id());
-        preparedStatement.setString(6, new Date().toString());
+        preparedStatement.setTimestamp(6, productOrder.getDate_time());
         return preparedStatement.execute();
 
     }
 
     public boolean removeReview(int productOrderId) throws SQLException {
         String query = "DELETE FROM Review WHERE (`id` = ?);";
-        Review curr = getReview(productOrderId);
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
         preparedStatement.setInt(1,productOrderId);
 
