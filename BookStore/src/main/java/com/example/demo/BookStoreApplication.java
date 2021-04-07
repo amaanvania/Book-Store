@@ -9,6 +9,7 @@ public class BookStoreApplication {
 
 	//amaan push
 	public static void main(String[] args) {
+
 		SpringApplication.run(BookStoreApplication.class, args);
 	}
 	// test

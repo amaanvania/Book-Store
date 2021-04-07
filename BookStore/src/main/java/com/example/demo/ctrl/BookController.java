@@ -3,6 +3,7 @@ package com.example.demo.ctrl;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.example.demo.beans.BookReviewTracker;
 import com.example.demo.beans.Review;
 import com.example.demo.beans.ReviewTracker;
 import com.example.demo.dao.ReviewTrackerDAO;
@@ -26,15 +27,14 @@ public class BookController {
 	ReviewTrackerDAO rtd;
 
 	@GetMapping("/all")
-	public List<Book> allBooks()
+	public List<BookReviewTracker> allBooks()
 	{
-		return bd.getAllBooks();
+		return rtd.getAllReviewsCombined();
 	}
 
 	@GetMapping("/{bid}")
-	public Book getBook(@PathVariable String bid)
-	{
-		return bd.getBook(bid);
+	public BookReviewTracker getBook(@PathVariable String bid) throws SQLException {
+		return rtd.getBookReviewsCombined(bid);
 	}
 
 	@GetMapping("/keyword/")
@@ -51,10 +51,7 @@ public class BookController {
 	public void insertBook(@RequestBody Book book) throws SQLException {
 
 		bd.insertBook(book);
-		if(!rtd.containsBook(book.getId())){
-			ReviewTracker newTracker = new ReviewTracker(book.getId());
-			rtd.insertReviewTracker(newTracker);
-		}
+
 
 
 	}

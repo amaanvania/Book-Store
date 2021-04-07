@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.beans.Review;
-import com.example.demo.beans.ReviewTracker;
 import com.example.demo.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -28,16 +26,16 @@ public class ReviewDAO {
 
     public Review getReview(int id)
     {
-        String query = "SELECT * FROM `4413`.Review where id='"+id+"';";
+        String query = "SELECT * FROM `4413`.Review where id= ?;";
 
-        List<Review> list = jdbc.query(query, new ReviewMapper());
+        List<Review> list = jdbc.query(query, ps -> ps.setInt(1, id), new ReviewMapper());
         if(list.size() == 0) return null;
         return list.get(0);
     }
 
     public List<Review> getReviewsUnderBook(String bid){
-        String query = "SELECT * FROM `4413`.Review where book_id='"+bid+"';";
-        return jdbc.query(query, new ReviewMapper());
+        String query = "SELECT * FROM `4413`.Review where book_id= ?;";
+        return jdbc.query(query, ps -> ps.setString(1, bid), new ReviewMapper());
     }
 
 

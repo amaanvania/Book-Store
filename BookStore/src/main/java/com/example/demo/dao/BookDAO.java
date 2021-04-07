@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.beans.ReviewTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,9 @@ public class BookDAO {
 
 	@Autowired
 	JdbcTemplate jdbc;
-	
+
+	@Autowired
+	ReviewTrackerDAO rtd;
 	public List<Book> getAllBooks()
 	{
 		String query = "SELECT * FROM `4413`.book;";
@@ -49,14 +52,16 @@ public class BookDAO {
 	
 	public Book getBook(String bid)
 	{
-		String query = "SELECT * FROM `4413`.book where bid='"+bid+"';";
-		return jdbc.queryForObject(query, new BookMapper());
+		String query = "SELECT * FROM `4413`.book where bid = ?;";
+		List<Book> books = jdbc.query(query, ps -> ps.setString(1, bid), new BookMapper());
+		if(books.size() == 0) return null;
+		return books.get(0);
 	}
 	
 	public List<Book> getBooksByCategory(String cat)
 	{
-		String query = "SELECT * FROM `4413`.Book where category='"+cat+"';"; 
-		return jdbc.query(query, new BookMapper());
+		String query = "SELECT * FROM `4413`.Book where category= ?;";
+		return jdbc.query(query, ps -> ps.setString(1, cat), new BookMapper());
 	}
 
 	public void insertBook(Book book) throws SQLException {
@@ -68,6 +73,12 @@ public class BookDAO {
 		preparedStatement.setString(4, book.getCategory());
 		preparedStatement.setInt(5, book.getQuantity());
 		preparedStatement.executeUpdate();
+
+		if(!rtd.containsBook(book.getId())){
+			ReviewTracker newTracker = new ReviewTracker(book.getId());
+			rtd.insertReviewTracker(newTracker);
+		}
+
 
 	}
 

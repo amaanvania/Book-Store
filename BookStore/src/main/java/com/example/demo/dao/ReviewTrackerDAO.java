@@ -31,8 +31,8 @@ public class ReviewTrackerDAO {
 
     public ReviewTracker getReviewTracker(String book_id)
     {
-        String query = "SELECT * FROM `4413`.ReviewTracker where book_id='"+book_id+"';";
-        List<ReviewTracker> temp = jdbc.query(query, new ReviewTrackerMapper());
+        String query = "SELECT * FROM `4413`.ReviewTracker where book_id = ?;";
+        List<ReviewTracker> temp = jdbc.query(query, ps -> ps.setString(1, book_id), new ReviewTrackerMapper());
         if(temp.size() == 0) return null;
         else return temp.get(0);
     }

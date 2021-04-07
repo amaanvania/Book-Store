@@ -4,18 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.example.demo.beans.Role;
-import com.example.demo.beans.UserRole;
-import com.example.demo.mapper.RoleMapper;
-import com.example.demo.mapper.UserRoleMapper;
+import com.example.demo.beans.*;
+import com.example.demo.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
-
-import com.example.demo.beans.Book;
-import com.example.demo.beans.User;
-import com.example.demo.mapper.BookMapper;
-import com.example.demo.mapper.UserMapper;
 
 @Repository
 public class UserDAO {
@@ -24,18 +18,30 @@ public class UserDAO {
 	
 	public User getUser(String username) throws Exception
 	{
-		String query = "SELECT * FROM `4413`.user where username='"+username+"';";
-		List<User> users =  jdbc.query(query, new UserMapper());
+		String query = "SELECT * FROM `4413`.user where username= ?;";
+		List<User> users  = jdbc.query(query, ps -> ps.setString(1, username), new UserMapper());
 		if(users.size() == 0) return null;
 		return users.get(0);
 	}
 
 	public boolean userExists(String username){
-		String query = "SELECT * FROM `4413`.user where username='"+username+"';";
-		List<User> users =  jdbc.query(query, new UserMapper());
+		String query = "SELECT * FROM `4413`.user where username= ?;";
+		List<User> users  = jdbc.query(query, ps -> ps.setString(1, username), new UserMapper());
 		return users.size() > 0;
 	}
 
+
+	public List<AnnomizedReport> getUserDetails(){
+		String query = "SELECT u.username, sum(p.total_price) as total_amount, a.zip FROM `4413`.PO p\n" +
+				"join `4413`.user u on u.id = p.user_id\n" +
+				"join `4413`.Address a on u.address = a.id\n" +
+				"group by u.id;";
+
+		List<AnnomizedReport> report = jdbc.query(query, new AnnomizedReportMapper());
+
+		return report;
+
+	}
 /*	public String getRole(String username) throws Exception {
 		User curr = getUser(username);
 		if(curr == null) throw new Exception("User doesn't exist");

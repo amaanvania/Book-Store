@@ -28,9 +28,9 @@ public class ProductOrderItemDAO {
 
     public ProductOrderItem getProductOrderItem(int id)
     {
-        String query = "SELECT * FROM `4413`.POItem where id='"+id+"';";
+        String query = "SELECT * FROM `4413`.POItem where id = ?;";
 
-        List<ProductOrderItem> list =  jdbc.query(query, new ProductOrderItemMapper());
+        List<ProductOrderItem> list =  jdbc.query(query, ps -> ps.setInt(1, id), new ProductOrderItemMapper());
         if(list.size() == 0) return null;
         return list.get(0);
     }
@@ -43,10 +43,10 @@ public class ProductOrderItemDAO {
 
     }
 
-    public List<ProductOrderItem> getSortedBooksByMonth(int month, int year) throws SQLException {
-        String query = "SELECT o1.bid, SUM(o1.quantity) " +
+    public List<ProductOrderItem> getSortedBooksByMonth(int month) throws SQLException {
+        String query = "SELECT o1.bid, SUM(o1.quantity) as total_sales " +
                 "FROM `4413`.POItem o1 join `4413`.PO p1 " +
-                "where o1.po_id = p1.id and month(p1.date_time) = ? and year(p1.date_time) = ?" +
+                "where o1.po_id = p1.id and month(p1.date_time) = ? " +
                 "GROUP BY o1.bid " +
                 "ORDER BY SUM(o1.quantity) " +
                 "DESC LIMIT 10;";

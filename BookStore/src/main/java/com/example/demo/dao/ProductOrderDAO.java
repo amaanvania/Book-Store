@@ -26,8 +26,8 @@ public class ProductOrderDAO {
 
     public ProductOrder getProductOrder(int id)
     {
-        String query = "SELECT * FROM `4413`.PO where id='"+id+"';";
-        List<ProductOrder> products = jdbc.query(query, new ProductOrderMapper());
+        String query = "SELECT * FROM `4413`.PO where id = ?;";
+        List<ProductOrder> products = jdbc.query(query, ps -> ps.setInt(1, id), new ProductOrderMapper());
         if(products.size() == 0) return null;
         return products.get(0);
     }

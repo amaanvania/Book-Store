@@ -19,8 +19,8 @@ public class AddressDAO {
 	// get address given address id. stored with user
 	public Address getAddress(int addressId)
 	{
-		String query = "SELECT * FROM `4413`.Address where id='"+addressId+"';";
-		List<Address> list = jdbc.query(query, new AddressMapper());
+		String query = "SELECT * FROM `4413`.Address where id= ?;";
+		List<Address> list = jdbc.query(query, ps -> ps.setInt(1, addressId), new AddressMapper());
 		if(list.size() ==0) return null;
 		return list.get(0);
 	}
