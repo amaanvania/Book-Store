@@ -14,6 +14,7 @@ public class ProductOrderItem {
     public ProductOrderItem(){
 
     }
+
     public ProductOrderItem(int id, String book_id, int quantity, int po_id) {
         this.id = id;
         this.book_id = book_id;

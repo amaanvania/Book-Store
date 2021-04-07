@@ -1,7 +1,5 @@
 package com.example.demo.beans;
 
-import javax.lang.model.element.AnnotationMirror;
-
 public class AnnomizedReport {
 
 

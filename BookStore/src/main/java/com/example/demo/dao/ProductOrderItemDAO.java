@@ -1,9 +1,14 @@
 package com.example.demo.dao;
 
+import com.example.demo.beans.MonthBookSale;
 import com.example.demo.beans.ProductOrderItem;
+import com.example.demo.beans.TopBook;
+import com.example.demo.mapper.MonthBookMapper;
 import com.example.demo.mapper.ProductOrderItemMapper;
+import com.example.demo.mapper.TopBookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -35,35 +40,33 @@ public class ProductOrderItemDAO {
         return list.get(0);
     }
 
-    public List<ProductOrderItem> getTopTenSoldBooks(){
-        String query = "SELECT o1.bid, SUM(o1.quantity) FROM `4413`.POItem o1 GROUP BY o1.bid ORDER BY SUM(o1.quantity) DESC LIMIT 10;";
-        List<ProductOrderItem> list =  jdbc.query(query, new ProductOrderItemMapper());
+    public List<TopBook> getTopTenSoldBooks(){
+        String query = "SELECT b.bid, b.title, SUM(o1.quantity) as quantity, b.price, CAST(b.price * SUM(o1.quantity) AS DECIMAL(7,2)) as revenue \n" +
+                "FROM `4413`.POItem o1 join `4413`.book b on o1.bid = b.bid\n" +
+                "GROUP BY o1.bid \n" +
+                "ORDER BY SUM(o1.quantity) DESC LIMIT 10;";
+        List<TopBook> list =  jdbc.query(query, new TopBookMapper());
         if(list.size() == 0) return null;
         return list;
 
     }
 
-    public List<ProductOrderItem> getSortedBooksByMonth(int month) throws SQLException {
-        String query = "SELECT o1.bid, SUM(o1.quantity) as total_sales " +
-                "FROM `4413`.POItem o1 join `4413`.PO p1 " +
-                "where o1.po_id = p1.id and month(p1.date_time) = ? " +
-                "GROUP BY o1.bid " +
-                "ORDER BY SUM(o1.quantity) " +
-                "DESC LIMIT 10;";
+    public List<MonthBookSale> getSortedBooksByMonth(int month, int year) throws SQLException {
+        String query = "SELECT item.bid, b.title, b.price, sum(item.quantity) as amount_sold, CAST(b.price * SUM(item.quantity) AS DECIMAL(7,2)) as monthly_sales\n" +
+                "from `4413`.POItem item join `4413`.PO p on item.po_id = p.id\n" +
+                "join `4413`.book b on item.bid = b.bid\n" +
+                "where MONTH(p.date_time) = ? and YEAR(p.date_time) = ? \n" +
+                "group by item.bid";
 
-        PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
 
-        preparedStatement.setInt(1,month);
-
-        List<ProductOrderItem> items = new ArrayList<>();
-        ProductOrderItemMapper p = new ProductOrderItemMapper();
-        ResultSet results = preparedStatement.executeQuery();
-        int row = 0;
-        while(results.next())
-            items.add(p.mapRow(results,++row));
-
-        return items;
-
+        List<MonthBookSale> list =  jdbc.query(query, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setInt(1,month);
+                ps.setInt(2,year);
+            }
+        }, new MonthBookMapper());
+        return list;
 
     }
 

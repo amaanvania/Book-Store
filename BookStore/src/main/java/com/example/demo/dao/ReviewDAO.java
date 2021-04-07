@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.beans.Review;
 import com.example.demo.mapper.ReviewMapper;
+import com.example.demo.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,8 @@ public class ReviewDAO {
 
     @Autowired
     JdbcTemplate jdbc;
+
+
 
     public List<Review> getAllReviews()
     {
@@ -56,6 +59,7 @@ public class ReviewDAO {
     }
     public boolean insertReview(Review productOrder) throws SQLException {
         String strSelect  = "INSERT INTO Review (review_id, book_id, review, rating, user_id, date_time) VALUES (?, ?, ?, ?, ?, ?);";
+
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
         preparedStatement.setInt(1, productOrder.getReview_id());
         preparedStatement.setString(2, productOrder.getBook_id());
