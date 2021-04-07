@@ -30,6 +30,13 @@ public class ReviewController {
         return rd.getReview(id);
     }
 
+
+    @GetMapping("/book/{bid}")
+    public List<Review> getReviewsForBook(@PathVariable String bid)
+    {
+
+        return rd.getReviewsUnderBook(bid);
+    }
     /* UNTESTED */
     @PostMapping(path="/insert", consumes = "application/json")
     public void insertReview(@RequestBody Review item) throws SQLException {

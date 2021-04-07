@@ -42,6 +42,9 @@ public class SessionController {
 	    @DeleteMapping("/delete")
 	    public List<SessionItem> deleteItem(@RequestBody CartItem bookID, HttpServletRequest request)
 	    {
+	    	System.out.println(bookID.getBookID());
+	    	System.out.println(bookID.getBookQuantity());
+	    	System.out.println(request.toString());
 	    	return ss.removeItem(bookID, request);
 	    }
 	    

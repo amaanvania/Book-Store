@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
+import com.example.demo.beans.BookReviewTracker;
 import com.example.demo.beans.ReviewTracker;
+import com.example.demo.mapper.BookReviewTrackerMapper;
 import com.example.demo.mapper.ReviewTrackerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,6 +39,14 @@ public class ReviewTrackerDAO {
         return getReviewTracker(bid) != null;
     }
 
+
+    public List<BookReviewTracker> getAllReviewsCombined(){
+        String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, r.rating, r.num_reviews\n" +
+                "FROM `4413`.ReviewTracker r \n" +
+                "join `4413`.book b on r.book_id = b.bid;";
+
+        return jdbc.query(strSelect,new BookReviewTrackerMapper());
+    }
     public void insertReviewTracker(ReviewTracker reviewTracker) throws SQLException {
         String strSelect  = "INSERT INTO ReviewTracker (book_id, rating, num_reviews) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);

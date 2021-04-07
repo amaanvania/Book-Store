@@ -1,9 +1,7 @@
 package com.example.demo.ctrl;
 
+import com.example.demo.beans.*;
 import com.example.demo.beans.ReviewTracker;
-import com.example.demo.beans.ReviewTracker;
-import com.example.demo.beans.User;
-import com.example.demo.beans.UserAddress;
 import com.example.demo.dao.ReviewTrackerDAO;
 import com.example.demo.service.ReviewTrackerService;
 import com.example.demo.service.UserService;
@@ -28,6 +26,12 @@ public class ReviewTrackerController {
     public List<ReviewTracker> getReviews()
     {
         return rtd.getAllReviewTrackers();
+    }
+
+    @GetMapping("/combined/all")
+    public List<BookReviewTracker> getReviewsCombined()
+    {
+        return rtd.getAllReviewsCombined();
     }
     @GetMapping("/{bid}")
     public ReviewTracker getReview(@PathVariable String bid)
