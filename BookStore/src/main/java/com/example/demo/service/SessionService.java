@@ -24,18 +24,37 @@ public class SessionService {
 	@Autowired PaymentService payment;
 	@Autowired ProductOrderService pod;
 	
+	public String validateCartQuantities(List<CartItem> cart)
+    {
+    	for (int i = 0 ; i < cart.size(); i++)
+    	{
+    		Book b = bd.getBook(cart.get(i).getBookID());
+    		if (cart.get(i).getBookQuantity() > b.getQuantity())
+    		{
+    			return "Maximum quantity for "+b.getName()+" is: "+ b.getQuantity();
+    		}
+    	}
+    	return "valid";
+    }
+	
 	public String checkout(Payment p, HttpServletRequest request)
 	{
-		if (payment.validatePayment(p, request) == 1)
+		List<CartItem> cart = getCart(request.getSession());
+		String validCartResponse = validateCartQuantities(cart);
+		if (validCartResponse.equals("valid"))
 		{
-			String response = pod.createOrder(p,getCart(request.getSession()), request);
-			if (response.equals("Order Created"))
+			if (payment.validatePayment(p, request) == 1)
 			{
-				request.getSession().setAttribute("cart", new ArrayList<>());
+				String response = pod.createOrder(p,cart, request);
+				if (response.equals("Order Created"))
+				{
+					request.getSession().setAttribute("cart", new ArrayList<>());
+				}
+				return response;
 			}
-			return response;
+			return "Invalid Payment";
 		}
-		return "Invalid Payment";
+		return validCartResponse;
 	}
 
 	public List<SessionItem> addToCart(CartItem item, HttpServletRequest request)

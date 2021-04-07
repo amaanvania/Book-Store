@@ -60,7 +60,7 @@ public class BookDAO {
 	
 	public List<Book> getBooksByCategory(String cat)
 	{
-		String query = "SELECT * FROM `4413`.Book where category= ?;";
+		String query = "SELECT * FROM book where category= ?;";
 		return jdbc.query(query, ps -> ps.setString(1, cat), new BookMapper());
 	}
 
@@ -80,6 +80,15 @@ public class BookDAO {
 		}
 
 
+	}
+	
+	public void changeBookQuantity(String bid, int quantity) throws SQLException
+	{
+		String query = "UPDATE book SET `quantity` = ? WHERE (`bid` = ?);";
+		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
+		preparedStatement.setInt(1, quantity);;
+		preparedStatement.setString(2,bid);
+		preparedStatement.execute();
 	}
 
 	public void removeBook(String bookId) throws SQLException {

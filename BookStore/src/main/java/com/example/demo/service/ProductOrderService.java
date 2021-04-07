@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.beans.Book;
 import com.example.demo.beans.CartItem;
 import com.example.demo.beans.Payment;
 import com.example.demo.beans.ProductOrder;
 import com.example.demo.beans.ProductOrderItem;
+import com.example.demo.dao.BookDAO;
 import com.example.demo.dao.ProductOrderDAO;
 import com.example.demo.dao.ProductOrderItemDAO;
 import com.example.demo.dao.UserDAO;
@@ -33,10 +35,13 @@ public class ProductOrderService {
     ProductOrderItemDAO poid;
     //INSERT INTO POItem (bid, quantity,po_id)
     
+    @Autowired
+    BookDAO bd;
     //    public ProductOrder(int id, String status, int user_id, Timestamp date_time, double total_price) {
+        
     
     public String createOrder(Payment item,List<CartItem> cart, HttpServletRequest request)
-    {
+    {	
     	ProductOrder order = null;
 		int oid = 0;
     	try {
@@ -62,9 +67,10 @@ public class ProductOrderService {
     	{
     		CartItem cartItem = cart.get(i);
     		ProductOrderItem poi = new ProductOrderItem(0, cartItem.getBookID(), cartItem.getBookQuantity(), oid);
-    	
     		try {
 				poid.insertProductOrderItem(poi);
+	    		bd.changeBookQuantity(cartItem.getBookID(), bd.getBook(cartItem.getBookID()).getQuantity() - cartItem.getBookQuantity());
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,7 +80,7 @@ public class ProductOrderService {
     	
     	
     	
-    	return "Order Created";
+    	return ""+oid;
     }
     
 }
