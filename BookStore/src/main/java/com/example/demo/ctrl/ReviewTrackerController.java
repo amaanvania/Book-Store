@@ -33,6 +33,11 @@ public class ReviewTrackerController {
     {
         return rtd.getAllReviewsCombined();
     }
+
+    @GetMapping("/combined/{bid}")
+    public BookReviewTracker getBookReviewCombined(@PathVariable String bid) throws SQLException {
+        return rtd.getBookReviewsCombined(bid);
+    }
     @GetMapping("/{bid}")
     public ReviewTracker getReview(@PathVariable String bid)
     {

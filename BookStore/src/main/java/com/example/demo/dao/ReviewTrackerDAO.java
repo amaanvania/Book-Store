@@ -3,12 +3,14 @@ package com.example.demo.dao;
 import com.example.demo.beans.BookReviewTracker;
 import com.example.demo.beans.ReviewTracker;
 import com.example.demo.mapper.BookReviewTrackerMapper;
+import com.example.demo.mapper.ProductOrderItemMapper;
 import com.example.demo.mapper.ReviewTrackerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -46,6 +48,24 @@ public class ReviewTrackerDAO {
                 "join `4413`.book b on r.book_id = b.bid;";
 
         return jdbc.query(strSelect,new BookReviewTrackerMapper());
+    }
+
+    public BookReviewTracker getBookReviewsCombined(String bid) throws SQLException {
+        String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, r.rating, r.num_reviews\n" +
+                "FROM `4413`.ReviewTracker r \n" +
+                "join `4413`.book b on r.book_id = b.bid \n" +
+                "WHERE b.bid= ?;";
+
+        PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
+        preparedStatement.setString(1,bid);
+
+
+        BookReviewTrackerMapper p = new BookReviewTrackerMapper();
+        ResultSet results = preparedStatement.executeQuery();
+        if(results.next())
+            return p.mapRow(results,1);
+
+        return null;
     }
     public void insertReviewTracker(ReviewTracker reviewTracker) throws SQLException {
         String strSelect  = "INSERT INTO ReviewTracker (book_id, rating, num_reviews) VALUES (?, ?, ?);";
