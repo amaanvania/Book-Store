@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import com.example.demo.beans.Book;
 import com.example.demo.beans.CartItem;
+import com.example.demo.beans.Payment;
 import com.example.demo.beans.SessionItem;
 import com.example.demo.dao.BookDAO;
 
@@ -20,6 +21,23 @@ public class SessionService {
 	@Autowired
 	BookDAO bd;
 	
+	@Autowired PaymentService payment;
+	@Autowired ProductOrderService pod;
+	
+	public String checkout(Payment p, HttpServletRequest request)
+	{
+		if (payment.validatePayment(p, request) == 1)
+		{
+			String response = pod.createOrder(p,getCart(request.getSession()), request);
+			if (response.equals("Order Created"))
+			{
+				request.getSession().setAttribute("cart", new ArrayList<>());
+			}
+			return response;
+		}
+		return "Invalid Payment";
+	}
+
 	public List<SessionItem> addToCart(CartItem item, HttpServletRequest request)
 	{
 		List<CartItem> cart = getCart(request.getSession());

@@ -34,7 +34,7 @@ public class ProductOrderDAO {
 
 
 
-    public void insertProductOrder(ProductOrder productOrder) throws SQLException {
+    public int insertProductOrder(ProductOrder productOrder) throws SQLException {
         String strSelect  = "INSERT INTO PO (status, user_id, date_time, total_price) VALUES (?, ?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
        // preparedStatement.setInt(1, productOrder.getId());
@@ -42,8 +42,12 @@ public class ProductOrderDAO {
         preparedStatement.setInt(2, productOrder.getUser_id());
         preparedStatement.setTimestamp(3, productOrder.getDate_time());
         preparedStatement.setDouble(4,productOrder.getTotal_price());
-        preparedStatement.executeUpdate();
-
+        int response = preparedStatement.executeUpdate();
+        if (response != 0)
+		{
+			return jdbc.queryForObject("SELECT COUNT(*) FROM `4413`.PO", Integer.class);
+		}
+        return response;
     }
 
     public void removeProductOrder(int productOrderId) throws SQLException {

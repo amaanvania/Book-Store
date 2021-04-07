@@ -1,0 +1,32 @@
+package com.example.demo.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.beans.Payment;
+
+@Service
+public class PaymentService {
+
+	// 1 for valid, 0 for invalid payment
+	public int validatePayment(Payment payment, HttpServletRequest request)
+	{
+		Object requestCount = request.getSession().getAttribute("requestCount");
+		if (requestCount == null)
+		{
+            request.getSession().setAttribute("requestCount", 1);
+            return 1;
+		}
+		int convReqCount = (int) requestCount;
+		convReqCount++;
+        request.getSession().setAttribute("requestCount", convReqCount);
+		
+        if (convReqCount % 3 == 0)
+        {
+        	return 0;
+        }
+        return 1;
+	}
+	
+}
