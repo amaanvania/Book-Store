@@ -61,15 +61,14 @@ public class ReviewDAO {
 
     }
     public boolean insertReview(Review productOrder) throws SQLException {
-        String strSelect  = "INSERT INTO Review (review_id, book_id, review, rating, user_id, date_time) VALUES (?, ?, ?, ?, ?, ?);";
+        String strSelect  = "INSERT INTO Review (book_id, review, rating, user_id, date_time) VALUES (?, ?, ?, ?, ?);";
 
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
-        preparedStatement.setInt(1, productOrder.getReview_id());
-        preparedStatement.setString(2, productOrder.getBook_id());
-        preparedStatement.setString(3, productOrder.getReview());
-        preparedStatement.setDouble(4, productOrder.getRating());
-        preparedStatement.setInt(5, productOrder.getUser_id());
-        preparedStatement.setTimestamp(6, productOrder.getDate_time());
+        preparedStatement.setString(1, productOrder.getBook_id());
+        preparedStatement.setString(2, productOrder.getReview());
+        preparedStatement.setDouble(3, productOrder.getRating());
+        preparedStatement.setInt(4, productOrder.getUser_id());
+        preparedStatement.setTimestamp(5, productOrder.getDate_time());
         return preparedStatement.execute();
 
     }
