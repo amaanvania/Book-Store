@@ -14,6 +14,10 @@ public class User{
 
     String role;
 
+    public User(){
+
+    }
+    
     public User(int id, int address, String fname, String lname, String username, String password) {
         this.id = id;
         this.address = address;
