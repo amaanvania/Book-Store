@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.example.demo.beans.Address;
@@ -19,7 +20,7 @@ import com.example.demo.dao.UserDAO;
 import com.example.demo.service.UserService;
 import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {UserService.class})
+@ContextConfiguration(classes = {UserService.class, PasswordEncoder.class})
 //@SpringBootTest
 public class UserServiceTest {
 
@@ -32,6 +33,7 @@ public class UserServiceTest {
 	
 	@MockBean AddressDAO ad;
 
+	@MockBean PasswordEncoder pe;
 	
 	User u1;
 	User u2;
@@ -67,7 +69,7 @@ public class UserServiceTest {
 	@Test
 	public void testLogin1() throws Exception {
 		Mockito.when(ud.getUser(u1.getUsername())).thenReturn(u1);
-		assertTrue(service.login(u1).equals("logged in"));
+		assertTrue(service.login(u1).equals("invalid password"));
 	}
 	
 	// invalid password
