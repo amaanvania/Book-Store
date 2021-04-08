@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -46,10 +47,11 @@ public class ReviewController {
     public void insertReview(@RequestBody Review item) throws SQLException {
 
         if(rs.containsScript(item.getReview())) return;
-
         String safe = rs.replaceInjection(item.getReview());
         item.setReview(safe);
-        boolean b = rd.insertReview(item);
+        item.setDate_time(new Timestamp(System.currentTimeMillis()));
+
+        rd.insertReview(item);
         rts.updateBooksRating(item.getBook_id(), item.getRating());
 
     }

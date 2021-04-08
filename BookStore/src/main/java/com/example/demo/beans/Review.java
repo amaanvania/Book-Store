@@ -14,6 +14,16 @@ public class Review {
 
     int user_id;
 
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     Timestamp date_time;
 
     public Review(){

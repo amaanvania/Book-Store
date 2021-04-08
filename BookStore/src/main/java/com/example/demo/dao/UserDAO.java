@@ -31,7 +31,7 @@ public class UserDAO {
 	}
 
 
-	public List<AnnomizedReport> getUserDetails(){
+	public List<AnnomizedReport> getUserReport(){
 		String query = "SELECT u.username, sum(p.total_price) as total_amount, a.zip FROM `4413`.PO p\n" +
 				"join `4413`.user u on u.id = p.user_id\n" +
 				"join `4413`.Address a on u.address = a.id\n" +

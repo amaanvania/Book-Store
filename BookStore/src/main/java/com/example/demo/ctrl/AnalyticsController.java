@@ -49,6 +49,6 @@ public class AnalyticsController {
 
     @GetMapping("/user/report")
     public List<AnnomizedReport> anonymizedReport(){
-        return ud.getUserDetails();
+        return ud.getUserReport();
     }
 }

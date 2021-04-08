@@ -21,7 +21,8 @@ public class ReviewDAO {
 
     public List<Review> getAllReviews()
     {
-        String query = "SELECT * FROM `4413`.Review;";
+        String query = "SELECT r.review_id, r.book_id, r.review, r.rating, r.user_id, r.date_time, u.fname, u.lname\n" +
+                "FROM `4413`.Review r join `4413`.user u on r.user_id = u.id;";
         return jdbc.query(query, new ReviewMapper());
 
     }
@@ -29,7 +30,8 @@ public class ReviewDAO {
 
     public Review getReview(int id)
     {
-        String query = "SELECT * FROM `4413`.Review where id= ?;";
+        String query = "SELECT r.review_id, r.book_id, r.review, r.rating, r.user_id, r.date_time, u.fname, u.lname\n" +
+                "FROM `4413`.Review r join `4413`.user u on r.user_id = u.id where r.review_id = ?;";
 
         List<Review> list = jdbc.query(query, ps -> ps.setInt(1, id), new ReviewMapper());
         if(list.size() == 0) return null;
@@ -37,7 +39,8 @@ public class ReviewDAO {
     }
 
     public List<Review> getReviewsUnderBook(String bid){
-        String query = "SELECT * FROM `4413`.Review where book_id= ?;";
+        String query = "SELECT r.review_id, r.book_id, r.review, r.rating, r.user_id, r.date_time, u.fname, u.lname\n" +
+                "FROM `4413`.Review r join `4413`.user u on r.user_id = u.id where r.book_id = ?;";
         return jdbc.query(query, ps -> ps.setString(1, bid), new ReviewMapper());
     }
 
