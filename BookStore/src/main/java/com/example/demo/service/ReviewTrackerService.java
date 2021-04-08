@@ -23,7 +23,7 @@ public class ReviewTrackerService {
         int oldNumReviews = old.getNumReviews();
 
         int newReviews = oldNumReviews + 1;
-        double newRating = (oldRating + rating) / newReviews;
+        double newRating = ((oldRating * old.getNumReviews()) + rating) / newReviews;
         System.out.println(newRating);
         rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
     }
