@@ -12,6 +12,8 @@ public class User{
 
     boolean enabled;
 
+    String role;
+
     public User(int id, int address, String fname, String lname, String username, String password) {
         this.id = id;
         this.address = address;
@@ -20,8 +22,26 @@ public class User{
         this.username = username;
         this.password = password;
         enabled = true;
+        this.role = "USER";
     }
 
+    public User(int id, int address, String fname, String lname, String username, String password, String role) {
+        this.id = id;
+        this.address = address;
+        this.fname = fname;
+        this.lname = lname;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public int getId() {
         return id;
