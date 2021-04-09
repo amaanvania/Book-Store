@@ -46,7 +46,7 @@ public class SessionService {
 			if (payment.validatePayment(p, request) == 1)
 			{
 				String response = pod.createOrder(p,cart, request);
-				if (response.equals("Order Created"))
+				if (response.length() <= 5)
 				{
 					request.getSession().setAttribute("cart", new ArrayList<>());
 				}
