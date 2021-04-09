@@ -69,7 +69,8 @@ public class UserServiceTest {
 	@Test
 	public void testLogin1() throws Exception {
 		Mockito.when(ud.getUser(u1.getUsername())).thenReturn(u1);
-		assertTrue(service.login(u1).equals("invalid password"));
+		Mockito.when(pe.matches(u1.getPassword(),u1.getPassword())).thenReturn(true);
+		assertTrue(service.login(u1).equals("logged in"));
 	}
 	
 	// invalid password
