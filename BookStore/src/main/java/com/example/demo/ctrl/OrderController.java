@@ -43,6 +43,20 @@ public class OrderController {
         return productOrderDAO.getProductsUnderUser(id);
     }
 
+    //get product order with id
+    @GetMapping("/partner/{id}")
+    public ProductOrder getProductOrderPartner(@PathVariable int id)
+    {
+        return productOrderDAO.getProductOrder(id);
+    }
+
+    //get product orders under a user
+    @GetMapping("/partner/user/{id}")
+    public List<ProductOrder> getProductOrderUnderUserPartner(@PathVariable int id)
+    {
+        return productOrderDAO.getProductsUnderUser(id);
+    }
+
     /* UNTESTED */
 
     //insert a product order

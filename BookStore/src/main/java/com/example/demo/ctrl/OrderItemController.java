@@ -35,10 +35,10 @@ public class OrderItemController {
     }
 
     //partner method for getting product items
-    @GetMapping("/get/{id}")
-    public ProductOrderItem getProductOrderItemPartner(@PathVariable int id)
+    @GetMapping("/partner/{bid}")
+    public List<ProductOrderItem> getProductOrderItemPartner(@PathVariable String bid)
     {
-        return productOrderItemDAO.getProductOrderItem(id);
+        return productOrderItemDAO.getProductOrderItem(bid);
     }
 
 

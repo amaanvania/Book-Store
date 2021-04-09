@@ -37,6 +37,17 @@ public class BookController {
 		return rtd.getBookReviewsCombined(bid);
 	}
 
+	//get book by id for partners
+	@GetMapping("/partner/book/{bid}")
+	public BookReviewTracker getBookPartner(@PathVariable String bid) throws SQLException {
+		return rtd.getBookReviewsCombined(bid);
+	}
+
+	//get book by id for partners
+	@GetMapping("/partner/all")
+	public List<BookReviewTracker> getAllBookPartner() throws SQLException {
+		return rtd.getAllReviewsCombined();
+	}
 
 	//get book when empty keyword
 	@GetMapping("/keyword/")

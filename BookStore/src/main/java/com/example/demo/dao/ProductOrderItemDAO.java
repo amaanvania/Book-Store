@@ -47,6 +47,15 @@ public class ProductOrderItemDAO {
         return list.get(0);
     }
 
+    @Transactional
+    public List<ProductOrderItem> getProductOrderItem(String bid)
+    {
+        String query = "SELECT * FROM `4413`.POItem where bid = ?;";
+
+        List<ProductOrderItem> list =  jdbc.query(query, ps -> ps.setString(1, bid), new ProductOrderItemMapper());
+        return list;
+    }
+
 
     @Transactional
     public List<TopBook> getTopTenSoldBooks(){
