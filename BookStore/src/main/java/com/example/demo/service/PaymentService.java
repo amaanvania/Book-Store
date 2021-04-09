@@ -1,15 +1,22 @@
 package com.example.demo.service;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.example.demo.beans.Payment;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.beans.Payment;
+import javax.servlet.http.HttpServletRequest;
+
+/*
+    Service Class used to provide
+    services and functionality
+    for Payments
+*/
 
 @Service
 public class PaymentService {
 
 	// 1 for valid, 0 for invalid payment
+
+	//used for 3 consecutive requests
 	public int validatePayment(Payment payment, HttpServletRequest request)
 	{
 		Object requestCount = request.getSession().getAttribute("requestCount");

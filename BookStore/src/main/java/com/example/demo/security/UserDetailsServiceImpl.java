@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+/*
+    Class used to help authenticate admins
+*/
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

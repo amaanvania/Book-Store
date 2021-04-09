@@ -1,24 +1,21 @@
 package com.example.demo.service;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ContextConfiguration;
-
 import com.example.demo.beans.Address;
 import com.example.demo.beans.User;
 import com.example.demo.beans.UserAddress;
 import com.example.demo.dao.AddressDAO;
 import com.example.demo.dao.UserDAO;
-import com.example.demo.service.UserService;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.junit.Assert.assertTrue;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {UserService.class, PasswordEncoder.class})
 //@SpringBootTest

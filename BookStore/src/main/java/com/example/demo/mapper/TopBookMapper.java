@@ -6,6 +6,14 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/*
+    Mapper for TopBook objects
+    used to map result sets to
+    TopBook objects
+*/
+
+
 public class TopBookMapper implements RowMapper<TopBook> {
     @Override
     public TopBook mapRow(ResultSet rs, int rowNum) throws SQLException {

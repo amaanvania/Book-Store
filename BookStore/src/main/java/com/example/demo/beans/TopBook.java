@@ -1,5 +1,10 @@
 package com.example.demo.beans;
 
+/*
+    Bean which stores TopBook object
+    this is used to store the top 10 book sellers
+
+*/
 public class TopBook {
 
     public String bid;

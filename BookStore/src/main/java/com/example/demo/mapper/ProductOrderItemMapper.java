@@ -6,6 +6,13 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+    Mapper for ProductOrderItem objects
+    used to map result sets to
+    ProductOrderItem objects
+*/
+
+
 public class ProductOrderItemMapper implements RowMapper<ProductOrderItem> {
 
 @Override

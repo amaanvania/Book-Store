@@ -1,24 +1,18 @@
 package com.example.demo.service;
-import static org.junit.Assert.*;
 
+import com.example.demo.beans.User;
+import com.example.demo.dao.UserDAO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
-
-import com.example.demo.beans.Address;
-import com.example.demo.beans.User;
-import com.example.demo.beans.UserAddress;
-import com.example.demo.dao.AddressDAO;
-import com.example.demo.dao.UserDAO;
-import com.example.demo.service.UserService;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {UserDAO.class})
 public class SQLInjectionTest {

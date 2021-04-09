@@ -9,11 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.time.Month;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/*
+    Service Class used to provide
+    services and functionality
+    for Analytics
+*/
 @Service
 public class AnalyticsService {
 
@@ -21,6 +26,7 @@ public class AnalyticsService {
     ProductOrderItemDAO pd;
 
 
+    //generate the sales for each month as a Map
     @Transactional
     public Map<String, List<MonthBookSale>> getMonthlyBookSales(int year) throws SQLException {
         Map<String, List<MonthBookSale>> result = new LinkedHashMap<>();

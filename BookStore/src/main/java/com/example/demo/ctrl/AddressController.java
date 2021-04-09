@@ -1,44 +1,46 @@
 package com.example.demo.ctrl;
 
+import com.example.demo.beans.Address;
+import com.example.demo.dao.AddressDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.beans.Address;
-import com.example.demo.beans.User;
-import com.example.demo.dao.AddressDAO;
-import com.example.demo.service.UserService;
-
+/*
+    Controller to handle address mappings
+*/
 @RestController
 @RequestMapping("/address")
 public class AddressController {
 	
 	@Autowired
 	AddressDAO ad;
-	
+
+	//method which returns address from given id
 	@GetMapping("/{id}")
 	public Address getAddress(@PathVariable int id)
 	{
 		return ad.getAddress(id);
 	}
-	
+
+
+	//method which inserts address
 	@PostMapping("/add")
 	public int insertAddress(@RequestBody Address address) throws SQLException
 	{
 		return ad.insertAddress(address);
 	}
 
+
+	//method which updates address
 	@PostMapping("/update")
 	public void updateAddress(@RequestBody Address address) throws SQLException {
 		ad.updateAddress(address);
 	}
+
+	//testing method
 	@PostMapping("/add2")
 	public Object test1(@RequestBody Map<String, Object>[] holder)
 	{

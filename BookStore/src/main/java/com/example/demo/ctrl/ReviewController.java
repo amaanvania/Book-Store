@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+
+/*
+    Controller to handle review mappings
+    Used for reviews under books
+*/
 @RestController
 @RequestMapping("/review")
 public class ReviewController {
@@ -24,11 +29,15 @@ public class ReviewController {
     @Autowired
     ReviewService rs;
 
+
+    //get all reviews
     @GetMapping("/all")
     public List<Review> getReviews()
     {
         return rd.getAllReviews();
     }
+
+    //get review with id
     @GetMapping("/{id}")
     public Review getReview(@PathVariable int id)
     {
@@ -36,6 +45,7 @@ public class ReviewController {
     }
 
 
+    //get review under book by book id
     @GetMapping("/book/{bid}")
     public List<Review> getReviewsForBook(@PathVariable String bid)
     {
@@ -43,6 +53,8 @@ public class ReviewController {
         return rd.getReviewsUnderBook(bid);
     }
     /* UNTESTED */
+
+    //insert a new review
     @PostMapping(path="/insert", consumes = "application/json")
     public void insertReview(@RequestBody Review item) throws SQLException {
 
@@ -56,6 +68,8 @@ public class ReviewController {
 
     }
 
+
+    //update/edit a review
     @PostMapping(path="/edit", consumes = "application/json")
     public void editReview(@RequestBody Review item) throws SQLException {
         if(rd.getReview(item.getReview_id()) == null) return;
@@ -65,6 +79,8 @@ public class ReviewController {
 
     }
     /* WORKS */
+
+    //delete a review
     @DeleteMapping("/{id}")
     public void removeReview(@PathVariable int id) throws SQLException {
         Review curr = rd.getReview(id);

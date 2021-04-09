@@ -1,19 +1,25 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import com.example.demo.beans.Book;
 import com.example.demo.beans.CartItem;
 import com.example.demo.beans.Payment;
 import com.example.demo.beans.SessionItem;
 import com.example.demo.dao.BookDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+    Service Class used to provide
+    services and functionality
+    for Sessions
+*/
+
 
 @Service
 public class SessionService {
@@ -23,7 +29,9 @@ public class SessionService {
 	
 	@Autowired PaymentService payment;
 	@Autowired ProductOrderService pod;
-	
+
+
+	//validate the cart and its quantities
 	public String validateCartQuantities(List<CartItem> cart)
     {
     	for (int i = 0 ; i < cart.size(); i++)
@@ -36,7 +44,9 @@ public class SessionService {
     	}
     	return "valid";
     }
-	
+
+
+    //checkout cart
 	public String checkout(Payment p, HttpServletRequest request)
 	{
 		List<CartItem> cart = getCart(request.getSession());
@@ -57,6 +67,8 @@ public class SessionService {
 		return validCartResponse;
 	}
 
+
+	//add book item to cart
 	public List<SessionItem> addToCart(CartItem item, HttpServletRequest request)
 	{
 		List<CartItem> cart = getCart(request.getSession());
@@ -83,7 +95,9 @@ public class SessionService {
         }
         return convertCartToSessionItem(cart);
 	}
-	
+
+
+	//update cart quantity for specific item
 	public List<SessionItem> updateItemQuantity(CartItem item, HttpServletRequest request)
 	{
 		List<CartItem> cart = getCart(request.getSession());
@@ -103,6 +117,8 @@ public class SessionService {
 		return convertCartToSessionItem(cart);
 	}
 
+
+	//remove a cart item
 	public List<SessionItem> removeItem(CartItem item, HttpServletRequest request)
 	{
 		List<CartItem> cart = getCart(request.getSession());
@@ -126,14 +142,17 @@ public class SessionService {
 		return convertCartToSessionItem(cart);
 	}
 
-	
+
+
+	//get index of the model and session
 	public List<SessionItem> index(Model model, HttpSession session) {
         List<CartItem> cart = getCart(session);
         model.addAttribute("cart", cart);
         model.addAttribute("sessionId", session.getId());
         return convertCartToSessionItem(cart);
     }
-	
+
+    //convert the cart to a session item
 	public List<SessionItem> convertCartToSessionItem(List<CartItem> cart)
 	{
 		ArrayList<SessionItem> items = new ArrayList<SessionItem>();
@@ -144,7 +163,9 @@ public class SessionService {
 		}
 		return items;
 	}
-	
+
+
+	//get the cart under the current session
 	public List<CartItem> getCart(HttpSession session)
 	{
 		List<CartItem> mycart = (List<CartItem>) session.getAttribute("cart");

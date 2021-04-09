@@ -1,5 +1,10 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores Payment object
+    This object is used at checkout
+*/
 public class Payment {
 	
 	private String username;

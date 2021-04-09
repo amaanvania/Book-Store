@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.beans.ProductOrder;
-import com.example.demo.beans.ProductOrderItem;
 import com.example.demo.mapper.ProductOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-
+/*
+    DAO class for Order objects
+    used to get/insert/update/delete
+    into/from database
+*/
 @Repository
 public class ProductOrderDAO {
 

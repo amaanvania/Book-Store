@@ -1,13 +1,20 @@
 package com.example.demo.beans;
 
+/*
+    Bean which stores Order Item object
+    This object is used to store items in a given order
+*/
 public class ProductOrderItem {
-
+    //primary key
     int id;
 
+
+    //foreign key
     String book_id;
 
     int quantity;
 
+    //foreign key to refer to order
     int po_id;
 
 

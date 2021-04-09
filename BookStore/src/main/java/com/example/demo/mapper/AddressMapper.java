@@ -1,12 +1,16 @@
 package com.example.demo.mapper;
 
+import com.example.demo.beans.Address;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
-import com.example.demo.beans.Address;
-import com.example.demo.beans.Book;
+/*
+    Mapper for address objects
+    used to map result sets to
+    address objects
+*/
 
 public class AddressMapper implements RowMapper<Address> {
 

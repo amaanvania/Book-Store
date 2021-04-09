@@ -1,9 +1,17 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores UserRole object
+    Used to store Roles for users
+*/
 public class UserRole {
 
+    //primary key / foreign key which refers to users
     int id;
 
+
+    //primary key / foreign key which refers to role
     int role_id;
 
 

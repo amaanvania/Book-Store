@@ -1,21 +1,18 @@
 package com.example.demo.ctrl;
 
+import com.example.demo.beans.Book;
+import com.example.demo.beans.BookReviewTracker;
+import com.example.demo.dao.BookDAO;
+import com.example.demo.dao.ReviewTrackerDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import com.example.demo.beans.BookReviewTracker;
-import com.example.demo.beans.Review;
-import com.example.demo.beans.ReviewTracker;
-import com.example.demo.dao.ReviewTrackerDAO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.example.demo.beans.Book;
-import com.example.demo.dao.BookDAO;
-
+/*
+    Controller to handle book mappings
+*/
 @RestController
 @RequestMapping("/book")
 public class BookController {
@@ -26,27 +23,36 @@ public class BookController {
 	@Autowired
 	ReviewTrackerDAO rtd;
 
+	//get all books
 	@GetMapping("/all")
 	public List<BookReviewTracker> allBooks()
 	{
 		return rtd.getAllReviewsCombined();
 	}
 
+
+	//get book by id
 	@GetMapping("/{bid}")
 	public BookReviewTracker getBook(@PathVariable String bid) throws SQLException {
 		return rtd.getBookReviewsCombined(bid);
 	}
 
+
+	//get book when empty keyword
 	@GetMapping("/keyword/")
 	public List<Book> getBooksEmptyKeyword(){
 		return bd.getAllBooks();
 	}
 
+
+	//get book by keyword
 	@GetMapping("/keyword/{keyword}")
 	public List<Book> getBooksByKeyword(@PathVariable String keyword){
 		return bd.getBooksByKeyword(keyword);
 	}
 	/* UNTESTED */
+
+	//insert book
 	@PostMapping(path="/insert", consumes = "application/json")
 	public void insertBook(@RequestBody Book book) throws SQLException {
 
@@ -57,6 +63,7 @@ public class BookController {
 	}
 
 	/* WORKS */
+	//delete book
 	@DeleteMapping("/{bid}")
 	public void removeBook(@PathVariable String bid) throws SQLException {
 		bd.removeBook(bid);

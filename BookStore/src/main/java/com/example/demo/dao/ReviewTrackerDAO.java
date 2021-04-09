@@ -3,7 +3,6 @@ package com.example.demo.dao;
 import com.example.demo.beans.BookReviewTracker;
 import com.example.demo.beans.ReviewTracker;
 import com.example.demo.mapper.BookReviewTrackerMapper;
-import com.example.demo.mapper.ProductOrderItemMapper;
 import com.example.demo.mapper.ReviewTrackerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +13,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+/*
+    DAO class for Book Review tracking objects
+    used to get/insert/update/delete
+    into/from database
+*/
 
 @Repository
 public class ReviewTrackerDAO {

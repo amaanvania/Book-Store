@@ -13,11 +13,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+    DAO class for Order Item objects
+    used to get/insert/update/delete
+    into/from database
+*/
 @Repository
 public class ProductOrderItemDAO {
 

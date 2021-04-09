@@ -6,6 +6,12 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/*
+    Mapper for ReviewTracker objects
+    used to map result sets to
+    ReviewTracker objects
+*/
 public class ReviewTrackerMapper implements RowMapper<ReviewTracker> {
 
     @Override

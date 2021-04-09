@@ -1,8 +1,13 @@
 package com.example.demo.beans;
-
+/*
+    Bean which stores User objects
+    This object is used to store registered users
+*/
 
 public class User{
 
+
+    //primary key to uniquely identify users
     int id;
     int address;
     String fname;

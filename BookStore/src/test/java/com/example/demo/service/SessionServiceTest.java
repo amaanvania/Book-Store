@@ -1,10 +1,8 @@
 package com.example.demo.service;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.demo.beans.Book;
+import com.example.demo.beans.CartItem;
+import com.example.demo.dao.BookDAO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +12,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.demo.beans.Book;
-import com.example.demo.beans.CartItem;
-import com.example.demo.beans.Payment;
-import com.example.demo.beans.User;
-import com.example.demo.dao.BookDAO;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {SessionService.class})

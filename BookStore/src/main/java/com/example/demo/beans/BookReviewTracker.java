@@ -1,11 +1,20 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores Book + Review object
+    Used to populate the catalog
+*/
+
+
 public class BookReviewTracker {
 
 
+
+    //primary key
     private String id;
     private String name;
-    private String image; // Image type need to change
+    private String image; // url
     private float price;
     private String category;
     private int quantity;

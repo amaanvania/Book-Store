@@ -1,16 +1,24 @@
 package com.example.demo.dao;
 
+import com.example.demo.beans.AnnomizedReport;
+import com.example.demo.beans.User;
+import com.example.demo.mapper.AnnomizedReportMapper;
+import com.example.demo.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.example.demo.beans.*;
-import com.example.demo.mapper.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+/*
+    DAO class for User objects
+    used to get/insert/update/delete
+    into/from database
+*/
+
 
 @Repository
 public class UserDAO {

@@ -2,7 +2,16 @@ package com.example.demo.beans;
 
 import java.io.Serializable;
 
+/*
+    Bean which stores CartItem object
+    used in carts
+*/
+
 public class CartItem implements Serializable {
+
+
+
+
 
 	/**
 	 * 

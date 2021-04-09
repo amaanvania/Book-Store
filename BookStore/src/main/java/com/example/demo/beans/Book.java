@@ -1,11 +1,21 @@
 package com.example.demo.beans;
 
+
+	/*
+  	Bean which stores Book object
+  	Used to store book objects
+  	from the database
+   */
+
+
 public class Book {
 
-	//ID
+
+
+	//primary key
 	private String id;
 	private String name;
-	private String image; // Image type need to change
+	private String image; //image url
 	private float price;
 	private String category;
 	private int quantity;

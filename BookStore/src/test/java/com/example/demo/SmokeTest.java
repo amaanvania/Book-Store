@@ -1,15 +1,11 @@
 package com.example.demo;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.example.demo.ctrl.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.example.demo.ctrl.BookController;
-import com.example.demo.ctrl.CategoryController;
-import com.example.demo.ctrl.OrderController;
-import com.example.demo.ctrl.OrderItemController;
-import com.example.demo.ctrl.ReviewController;
-import com.example.demo.ctrl.UserController;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class SmokeTest {

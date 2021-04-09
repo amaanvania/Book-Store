@@ -1,12 +1,18 @@
 package com.example.demo.mapper;
 
-import com.example.demo.beans.Address;
-import com.example.demo.beans.Book;
 import com.example.demo.beans.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+
+/*
+    Mapper for User objects
+    used to map result sets to
+    User objects
+*/
+
 
 public class UserMapper implements RowMapper<User> {
 

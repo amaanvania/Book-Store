@@ -7,6 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+/*
+    Mapper for BookReviewTracker objects
+    used to map result sets to
+    BookReviewTracker objects
+*/
+
+
 public class BookReviewTrackerMapper implements RowMapper<BookReviewTracker> {
     @Override
     public BookReviewTracker mapRow(ResultSet rs, int rowNum) throws SQLException {

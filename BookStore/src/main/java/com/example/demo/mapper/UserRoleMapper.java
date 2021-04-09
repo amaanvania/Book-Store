@@ -1,11 +1,18 @@
 package com.example.demo.mapper;
 
-import com.example.demo.beans.Role;
 import com.example.demo.beans.UserRole;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+
+/*
+    Mapper for UserRole objects
+    used to map result sets to
+    UserRole objects
+*/
+
 
 public class UserRoleMapper  implements RowMapper<UserRole> {
 

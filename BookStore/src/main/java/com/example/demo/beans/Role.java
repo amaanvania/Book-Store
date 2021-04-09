@@ -1,7 +1,13 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores Role object
+    Used to assign roles
+*/
 public class Role {
 
+    //primary key
     int id;
 
     String name;

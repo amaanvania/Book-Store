@@ -1,20 +1,24 @@
 package com.example.demo.dao;
 
+import com.example.demo.beans.Book;
+import com.example.demo.beans.ReviewTracker;
+import com.example.demo.mapper.BookMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.beans.ReviewTracker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+/*
+    DAO class for Book objects
+    used to get/insert/update/delete
+    into/from database
+*/
 
-import com.example.demo.beans.Book;
-import com.example.demo.mapper.BookMapper;
-import org.springframework.transaction.annotation.Transactional;
-
-//https://www.journaldev.com/17053/spring-jdbctemplate-example
 @Repository
 public class BookDAO {
 

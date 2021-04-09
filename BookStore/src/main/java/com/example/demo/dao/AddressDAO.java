@@ -1,17 +1,21 @@
 package com.example.demo.dao;
 
+import com.example.demo.beans.Address;
+import com.example.demo.mapper.AddressMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
-import com.example.demo.beans.Address;
-import com.example.demo.mapper.AddressMapper;
-import org.springframework.transaction.annotation.Transactional;
-
+/*
+    DAO class for address objects
+    used to get/insert/update/delete
+    into/from database
+*/
 @Repository
 public class AddressDAO {
 	@Autowired
@@ -51,6 +55,7 @@ public class AddressDAO {
 	}
 
 
+	//update the address
 	@Transactional
 	public void updateAddress(Address address) throws SQLException
 	{

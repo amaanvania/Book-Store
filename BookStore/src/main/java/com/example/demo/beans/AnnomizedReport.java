@@ -1,6 +1,12 @@
 package com.example.demo.beans;
 
+/*
+    Bean which stores annomized report object
+    Used for user analytics bys admins
+*/
+
 public class AnnomizedReport {
+
 
 
     String username;

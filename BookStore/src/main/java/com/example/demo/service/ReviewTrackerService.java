@@ -7,12 +7,22 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
+/*
+    Service Class used to provide
+    services and functionality
+    for ReviewTrackers
+*/
+
+
+
 @Service
 public class ReviewTrackerService {
 
     @Autowired
     ReviewTrackerDAO rtd;
 
+
+    //update a books rating after new review
     public void updateBooksRating(String bid, double rating) throws SQLException {
         ReviewTracker old = rtd.getReviewTracker(bid);
 
@@ -28,6 +38,8 @@ public class ReviewTrackerService {
         rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
     }
 
+
+    //decrement a books rating after deleted review
     public void decrementBooksRating(String bid, double rating) throws SQLException {
         ReviewTracker old = rtd.getReviewTracker(bid);
 
@@ -44,6 +56,8 @@ public class ReviewTrackerService {
         rtd.updateReviewTracker(bid, new ReviewTracker(bid,newRating,newReviews));
     }
 
+
+    //alter a books review if user edits
     public void updateBooksRatingEdit(String bid, double rating) throws SQLException {
         ReviewTracker old = rtd.getReviewTracker(bid);
 

@@ -1,10 +1,16 @@
 package com.example.demo.mapper;
 
+import com.example.demo.beans.Book;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.example.demo.beans.Book;
-import org.springframework.jdbc.core.RowMapper;
+/*
+    Mapper for book objects
+    used to map result sets to
+    book objects
+*/
 
 public class BookMapper implements RowMapper<Book> {
 

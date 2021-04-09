@@ -1,7 +1,13 @@
 package com.example.demo.beans;
-
+/*
+    Bean which stores address object
+    Used to represent address objects
+    from the database
+*/
 public class Address {
 
+
+    //primary key
     int id;
     String street;
     String city;

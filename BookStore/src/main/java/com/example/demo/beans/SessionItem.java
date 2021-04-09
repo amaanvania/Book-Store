@@ -1,5 +1,10 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores SessionItem object
+    This object is used to store SessionItems
+*/
 public class SessionItem {
 
 	private Book book;

@@ -1,7 +1,15 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores ReviewTracker objects
+    This object is used to Store the running sum
+    review average, and the total number of reviews
+    on a book.
+*/
 public class ReviewTracker {
 
+    //primary/foreign key to refer to book
     String bid;
     double rating;
     int numReviews;

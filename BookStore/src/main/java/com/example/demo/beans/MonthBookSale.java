@@ -1,7 +1,13 @@
 package com.example.demo.beans;
 
-public class MonthBookSale {
 
+/*
+    Bean which stores MonthBookSale object
+    This object is used for analytics
+    to store monthly book sales
+*/
+public class MonthBookSale {
+    //primary key
     String bid;
 
     String title;

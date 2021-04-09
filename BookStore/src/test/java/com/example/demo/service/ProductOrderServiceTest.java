@@ -1,12 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.beans.Address;
-import com.example.demo.beans.CartItem;
-import com.example.demo.beans.Payment;
-import com.example.demo.beans.ProductOrder;
-import com.example.demo.beans.ProductOrderItem;
-import com.example.demo.beans.User;
-import com.example.demo.dao.AddressDAO;
+import com.example.demo.beans.*;
 import com.example.demo.dao.BookDAO;
 import com.example.demo.dao.ProductOrderDAO;
 import com.example.demo.dao.ProductOrderItemDAO;
@@ -19,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.junit.Assert.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {ProductOrderService.class})

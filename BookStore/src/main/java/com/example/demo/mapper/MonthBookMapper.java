@@ -6,6 +6,14 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+    Mapper for MonthBook objects
+    used to map result sets to
+    MonthBook objects
+*/
+
+
+
 public class MonthBookMapper implements RowMapper<MonthBookSale> {
     @Override
     public MonthBookSale mapRow(ResultSet rs, int rowNum) throws SQLException {

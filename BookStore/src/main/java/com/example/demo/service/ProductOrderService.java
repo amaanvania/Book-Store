@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.beans.Book;
 import com.example.demo.beans.CartItem;
 import com.example.demo.beans.Payment;
 import com.example.demo.beans.ProductOrder;
@@ -9,17 +8,20 @@ import com.example.demo.dao.BookDAO;
 import com.example.demo.dao.ProductOrderDAO;
 import com.example.demo.dao.ProductOrderItemDAO;
 import com.example.demo.dao.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.sql.Timestamp;
-
+/*
+    Service Class used to provide
+    services and functionality
+    for ProductOrders
+*/
 
 @Service
 public class ProductOrderService {
@@ -39,7 +41,7 @@ public class ProductOrderService {
     BookDAO bd;
     //    public ProductOrder(int id, String status, int user_id, Timestamp date_time, double total_price) {
 
-
+	//crete a new order
     public String createOrder(Payment item,List<CartItem> cart, HttpServletRequest request)
     {
     	ProductOrder order = null;

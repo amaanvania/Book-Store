@@ -5,7 +5,11 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/*
+    Mapper for AnnomizedReport objects
+    used to map result sets to
+    address AnnomizedReport
+*/
 public class AnnomizedReportMapper implements RowMapper<AnnomizedReport> {
 
     @Override

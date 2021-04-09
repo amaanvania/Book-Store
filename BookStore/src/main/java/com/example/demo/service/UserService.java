@@ -11,6 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
+
+/*
+    Service Class used to provide
+    services and functionality
+    for User
+*/
+
+
 @Service
 public class UserService {
     @Autowired
@@ -21,6 +29,8 @@ public class UserService {
     @Autowired
     PasswordEncoder pe;
 
+
+    //convert user into useraddress
     public UserAddress getUserInfo(String username) {
         User u = null;
         try {
@@ -35,6 +45,7 @@ public class UserService {
     }
 
 
+    //register a new user
     public String registerUser(UserAddress holder) {
         User u = holder.getUser();
 
@@ -74,6 +85,9 @@ public class UserService {
         return "Unable to Create Account";
     }
 
+
+    //login an existing user
+    //checks password against encrypted
     public String login(User u) {
         User retrievedUser = null;
         try {

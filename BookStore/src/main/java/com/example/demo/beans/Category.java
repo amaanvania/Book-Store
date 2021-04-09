@@ -1,7 +1,11 @@
 package com.example.demo.beans;
 
+/*
+    Bean which stores Category object
+    Used to filter books
+*/
 public class Category {
-
+	//primary key
 	private String id;
 	private String name;
 	private String image_url;

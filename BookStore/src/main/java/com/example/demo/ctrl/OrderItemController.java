@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.List;
 
+
+/*
+    Controller to handle Order Item mappings
+    Used to handle Order items
+*/
 @RestController
 @RequestMapping("/item")
 public class OrderItemController {
@@ -15,19 +20,21 @@ public class OrderItemController {
     @Autowired
     ProductOrderItemDAO productOrderItemDAO;
 
-
+    //get all product order items
     @GetMapping("/all")
     public List<ProductOrderItem> allProductOrderItems()
     {
         return productOrderItemDAO.getAllProductOrderItems();
     }
 
+    //get product order item with id
     @GetMapping("/{id}")
     public ProductOrderItem getProductOrderItem(@PathVariable int id)
     {
         return productOrderItemDAO.getProductOrderItem(id);
     }
 
+    //partner method for getting product items
     @GetMapping("/get/{id}")
     public ProductOrderItem getProductOrderItemPartner(@PathVariable int id)
     {
@@ -36,12 +43,16 @@ public class OrderItemController {
 
 
     /* UNTESTED */
+
+    //insert product item
     @PostMapping(path="/insert", consumes = "application/json")
-    public void insertProductOrderItemItem(@RequestBody ProductOrderItem item) throws SQLException {
+    public void insertProductOrderItem(@RequestBody ProductOrderItem item) throws SQLException {
         productOrderItemDAO.insertProductOrderItem(item);
     }
 
     /* WORKS */
+
+    //delete product item
     @DeleteMapping("/{id}")
     public void removeProductOrderItem(@PathVariable int id) throws SQLException {
         productOrderItemDAO.removeProductOrderItem(id);

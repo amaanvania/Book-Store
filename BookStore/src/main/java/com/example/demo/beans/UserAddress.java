@@ -1,6 +1,13 @@
 package com.example.demo.beans;
 
+
+/*
+    Bean which stores UserAddress objects
+    This object is used for registering
+    where a user and address are created
+*/
 public class UserAddress {
+
 
 	private User user;
 	private Address address;

@@ -2,16 +2,23 @@ package com.example.demo.beans;
 
 import java.sql.Timestamp;
 
+/*
+    Bean which stores Review objects
+    This object is used to store Book reviews
+*/
 public class Review {
-
+    //primary key
     int review_id;
 
+    //foreign key to refer to book
     String book_id;
 
     String review;
 
     double rating;
 
+
+    //foreign key to refer to user
     int user_id;
 
     String name;

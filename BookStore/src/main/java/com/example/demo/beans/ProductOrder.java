@@ -1,10 +1,13 @@
 package com.example.demo.beans;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
+/*
+    Bean which stores ProductOrder object
+    This object is used to store product orders
+*/
 public class ProductOrder {
-
+    //primary key
     int id;
 
     String status;
