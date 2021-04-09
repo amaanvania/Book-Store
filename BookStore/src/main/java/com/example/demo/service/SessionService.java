@@ -87,20 +87,14 @@ public class SessionService {
 	public List<SessionItem> updateItemQuantity(CartItem item, HttpServletRequest request)
 	{
 		List<CartItem> cart = getCart(request.getSession());
-
-		System.out.println(item.toString());
-
 		if (item != null) {
         	
 			for (int i = 0 ; i < cart.size(); i++)
 			{
-				System.out.println(cart.get(i).toString());
-
 				if (item.getBookID().equals(cart.get(i).getBookID()))
 				{
-					CartItem curr = cart.get(i);
-					curr.setBookQuantity(item.getBookQuantity());
-					cart.add(i,curr);
+
+					cart.get(i).setBookQuantity(item.getBookQuantity());
 					break;
 				}
 			}
