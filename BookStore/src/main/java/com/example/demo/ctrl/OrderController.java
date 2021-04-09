@@ -29,6 +29,11 @@ public class OrderController {
         return productOrderDAO.getProductOrder(id);
     }
 
+    @GetMapping("/user/{id}")
+    public List<ProductOrder> getProductOrderUnderUser(@PathVariable int id)
+    {
+        return productOrderDAO.getProductsUnderUser(id);
+    }
 
     /* UNTESTED */
     @PostMapping(path="/insert", consumes = "application/json")

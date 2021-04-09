@@ -34,7 +34,11 @@ public class AddressController {
 	{
 		return ad.insertAddress(address);
 	}
-	
+
+	@PostMapping("/update")
+	public void updateAddress(@RequestBody Address address) throws SQLException {
+		ad.updateAddress(address);
+	}
 	@PostMapping("/add2")
 	public Object test1(@RequestBody Map<String, Object>[] holder)
 	{

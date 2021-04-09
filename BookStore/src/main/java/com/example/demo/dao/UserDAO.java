@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserDAO {
 	@Autowired
 	JdbcTemplate jdbc;
-	
+
+	@Transactional
 	public User getUser(String username) throws Exception
 	{
 		String query = "SELECT * FROM `4413`.user where username= ?;";
@@ -24,6 +26,7 @@ public class UserDAO {
 		return users.get(0);
 	}
 
+	@Transactional
 	public boolean userExists(String username){
 		String query = "SELECT * FROM `4413`.user where username= ?;";
 		List<User> users  = jdbc.query(query, ps -> ps.setString(1, username), new UserMapper());
@@ -31,6 +34,7 @@ public class UserDAO {
 	}
 
 
+	@Transactional
 	public List<AnnomizedReport> getUserReport(){
 		String query = "SELECT u.username, sum(p.total_price) as total_amount, a.zip FROM `4413`.PO p\n" +
 				"join `4413`.user u on u.id = p.user_id\n" +
@@ -67,6 +71,7 @@ public class UserDAO {
 		return "ADMIN";
 	}
 
+	@Transactional
 	public int insert(User user) throws SQLException {
 		String strSelect  = "INSERT INTO user (address,fname,lname,username,pw) VALUES (?, ?, ?, ?, ?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);

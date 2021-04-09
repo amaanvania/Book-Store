@@ -26,22 +26,22 @@ public class ProductOrderService {
 
 	@Autowired
 	UserDAO ud;
-	
+
     @Autowired
     ProductOrderDAO productOrderDAO;
     //INSERT INTO PO (status, user_id, date_time, total_price)
-    
+
     @Autowired
     ProductOrderItemDAO poid;
     //INSERT INTO POItem (bid, quantity,po_id)
-    
+
     @Autowired
     BookDAO bd;
     //    public ProductOrder(int id, String status, int user_id, Timestamp date_time, double total_price) {
-        
-    
+
+
     public String createOrder(Payment item,List<CartItem> cart, HttpServletRequest request)
-    {	
+    {
     	ProductOrder order = null;
 		int oid = 0;
     	try {
@@ -58,9 +58,9 @@ public class ProductOrderService {
 			e.printStackTrace();
 			return "Unable to insert Order";
 		}
-    	
+
     	// order inserted, now inserting order items
-    	
+
     	//    public ProductOrderItem(int id, String book_id, int quantity, int po_id) {
     	System.out.println(oid);
     	for (int i = 0 ; i < cart.size(); i++)
@@ -68,10 +68,14 @@ public class ProductOrderService {
     		CartItem cartItem = cart.get(i);
     		ProductOrderItem poi = new ProductOrderItem(0, cartItem.getBookID(), cartItem.getBookQuantity(), oid);
     		try {
-				poid.insertProductOrderItem(poi);
-	    		bd.changeBookQuantity(cartItem.getBookID(), bd.getBook(cartItem.getBookID()).getQuantity() - cartItem.getBookQuantity());
 
-			} catch (SQLException e) {
+				poid.insertProductOrderItem(poi);
+				Thread.sleep(1000);
+				int quantity = bd.getBook(cartItem.getBookID()).getQuantity();
+				Thread.sleep(1000);
+	    		bd.changeBookQuantity(cartItem.getBookID(),  quantity - cartItem.getBookQuantity());
+				Thread.sleep(1000);
+			} catch (SQLException | InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return "Unable to insert one cart item:"+cartItem.getBookID();
@@ -82,5 +86,5 @@ public class ProductOrderService {
     	
     	return ""+oid;
     }
-    
+
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,8 @@ public class ProductOrderItemDAO {
     @Autowired
     JdbcTemplate jdbc;
 
+
+    @Transactional
     public List<ProductOrderItem> getAllProductOrderItems()
     {
         String query = "SELECT * FROM `4413`.POItem;";
@@ -30,7 +33,7 @@ public class ProductOrderItemDAO {
 
     }
 
-
+    @Transactional
     public ProductOrderItem getProductOrderItem(int id)
     {
         String query = "SELECT * FROM `4413`.POItem where id = ?;";
@@ -40,6 +43,8 @@ public class ProductOrderItemDAO {
         return list.get(0);
     }
 
+
+    @Transactional
     public List<TopBook> getTopTenSoldBooks(){
         String query = "SELECT b.bid, b.title, SUM(o1.quantity) as quantity, b.price, CAST(b.price * SUM(o1.quantity) AS DECIMAL(7,2)) as revenue \n" +
                 "FROM `4413`.POItem o1 join `4413`.book b on o1.bid = b.bid\n" +
@@ -50,7 +55,7 @@ public class ProductOrderItemDAO {
         return list;
 
     }
-
+    @Transactional
     public List<MonthBookSale> getSortedBooksByMonth(int month, int year) throws SQLException {
         String query = "SELECT item.bid, b.title, b.price, sum(item.quantity) as amount_sold, CAST(b.price * SUM(item.quantity) AS DECIMAL(7,2)) as monthly_sales\n" +
                 "from `4413`.POItem item join `4413`.PO p on item.po_id = p.id\n" +
@@ -72,6 +77,7 @@ public class ProductOrderItemDAO {
 
 
 
+    @Transactional
     public void insertProductOrderItem(ProductOrderItem productOrder) throws SQLException {
         String strSelect  = "INSERT INTO POItem (bid, quantity,po_id) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
@@ -83,6 +89,7 @@ public class ProductOrderItemDAO {
 
     }
 
+    @Transactional
     public void removeProductOrderItem(int productOrderId) throws SQLException {
         String query = "DELETE FROM POItem WHERE (`id` = ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);

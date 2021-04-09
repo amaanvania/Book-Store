@@ -10,13 +10,16 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.beans.Address;
 import com.example.demo.mapper.AddressMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class AddressDAO {
 	@Autowired
 	JdbcTemplate jdbc;
-	
+
+
 	// get address given address id. stored with user
+	@Transactional
 	public Address getAddress(int addressId)
 	{
 		String query = "SELECT * FROM `4413`.Address where id= ?;";
@@ -27,6 +30,7 @@ public class AddressDAO {
 
 
 	// return the address id
+	@Transactional
 	public int insertAddress(Address address) throws SQLException
 	{
 		String query = "INSERT INTO `4413`.Address(street,city,province,country,zip,phone_no) VALUES (?,?,?,?,?,?)";
@@ -44,5 +48,22 @@ public class AddressDAO {
 			return jdbc.queryForObject("SELECT COUNT(*) FROM `4413`.Address", Integer.class);
 		}
 		return response;
+	}
+
+
+	@Transactional
+	public void updateAddress(Address address) throws SQLException
+	{
+		String query = "UPDATE `4413`.`Address` SET `street` = ?, `city` = ?, `province` = ?, `country` = ?, `zip` = ? WHERE (`id` = ?);";
+		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
+		preparedStatement.setString(1, address.getStreet());
+		preparedStatement.setString(2, address.getCity());
+		preparedStatement.setString(3, address.getProvince());
+		preparedStatement.setString(4, address.getCountry());
+		preparedStatement.setString(5, address.getZip());
+		preparedStatement.setInt(6, address.getId());
+
+		preparedStatement.executeUpdate();
+
 	}
 }

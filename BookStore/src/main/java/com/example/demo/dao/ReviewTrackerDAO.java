@@ -8,6 +8,7 @@ import com.example.demo.mapper.ReviewTrackerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,8 @@ public class ReviewTrackerDAO {
     @Autowired
     JdbcTemplate jdbc;
 
+
+    @Transactional
     public List<ReviewTracker> getAllReviewTrackers()
     {
         String query = "SELECT * FROM `4413`.ReviewTracker;";
@@ -29,6 +32,7 @@ public class ReviewTrackerDAO {
     }
 
 
+    @Transactional
     public ReviewTracker getReviewTracker(String book_id)
     {
         String query = "SELECT * FROM `4413`.ReviewTracker where book_id = ?;";
@@ -37,11 +41,13 @@ public class ReviewTrackerDAO {
         else return temp.get(0);
     }
 
+    @Transactional
     public boolean containsBook(String bid){
         return getReviewTracker(bid) != null;
     }
 
 
+    @Transactional
     public List<BookReviewTracker> getAllReviewsCombined(){
         String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, b.image, r.rating, r.num_reviews\n" +
                 "FROM `4413`.ReviewTracker r \n" +
@@ -50,6 +56,7 @@ public class ReviewTrackerDAO {
         return jdbc.query(strSelect,new BookReviewTrackerMapper());
     }
 
+    @Transactional
     public BookReviewTracker getBookReviewsCombined(String bid) throws SQLException {
         String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, b.image, r.rating, r.num_reviews\n" +
                 "FROM `4413`.ReviewTracker r \n" +
@@ -67,6 +74,7 @@ public class ReviewTrackerDAO {
 
         return null;
     }
+    @Transactional
     public void insertReviewTracker(ReviewTracker reviewTracker) throws SQLException {
         String strSelect  = "INSERT INTO ReviewTracker (book_id, rating, num_reviews) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
@@ -77,6 +85,7 @@ public class ReviewTrackerDAO {
 
     }
 
+    @Transactional
     public void removeReviewTracker(String bookID) throws SQLException {
         String query = "DELETE FROM ReviewTracker WHERE (`book_id` = ?);";
         PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
@@ -84,6 +93,7 @@ public class ReviewTrackerDAO {
         preparedStatement.execute();
     }
 
+    @Transactional
     public void updateReviewTracker(String bookID, ReviewTracker newReviewTracker) throws SQLException {
         if(!bookID.equals(newReviewTracker.getBid())) return;
 

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.beans.Book;
 import com.example.demo.mapper.BookMapper;
+import org.springframework.transaction.annotation.Transactional;
+
 //https://www.journaldev.com/17053/spring-jdbctemplate-example
 @Repository
 public class BookDAO {
@@ -21,6 +23,8 @@ public class BookDAO {
 
 	@Autowired
 	ReviewTrackerDAO rtd;
+
+	@Transactional
 	public List<Book> getAllBooks()
 	{
 		String query = "SELECT * FROM `4413`.book;";
@@ -28,6 +32,7 @@ public class BookDAO {
 		
 	}
 
+	@Transactional
 	public List<Book> getBooksByKeyword(String keyword)
 	{
 		String query = "SELECT * FROM `4413`.book;";
@@ -43,13 +48,15 @@ public class BookDAO {
 		return result;
 
 	}
-	
+
+	@Transactional
 	public List<String> getAllCategories()
 	{
 		String query = "SELECT distinct category FROM `4413`.book;";
 		return jdbc.queryForList(query, String.class);
 	}
-	
+
+	@Transactional
 	public Book getBook(String bid)
 	{
 		String query = "SELECT * FROM `4413`.book where bid = ?;";
@@ -58,16 +65,19 @@ public class BookDAO {
 		return books.get(0);
 	}
 
+	@Transactional
 	public boolean containsBook(String bid){
 		return getBook(bid) != null;
 	}
-	
+
+	@Transactional
 	public List<Book> getBooksByCategory(String cat)
 	{
 		String query = "SELECT * FROM book where category= ?;";
 		return jdbc.query(query, ps -> ps.setString(1, cat), new BookMapper());
 	}
 
+	@Transactional
 	public void insertBook(Book book) throws SQLException {
 		String strSelect  = "INSERT INTO book (bid, title, price, category, quantity, image, publisher, author) VALUES (?, ?, ?, ?,?,?,?,?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
@@ -88,7 +98,8 @@ public class BookDAO {
 
 
 	}
-	
+
+	@Transactional
 	public void changeBookQuantity(String bid, int quantity) throws SQLException
 	{
 		String query = "UPDATE book SET `quantity` = ? WHERE (`bid` = ?);";
@@ -98,6 +109,8 @@ public class BookDAO {
 		preparedStatement.execute();
 	}
 
+
+	@Transactional
 	public void updateBook(Book b) throws SQLException
 	{
 		String query = "UPDATE `4413`.`book` SET `title` = ?, `price` = ?, `category` = ?, `quantity` = ?, `image` = ?, `publisher` = ?, `author` = ? WHERE (`bid` = ?);";
@@ -113,6 +126,8 @@ public class BookDAO {
 		preparedStatement.executeUpdate();
 	}
 
+
+	@Transactional
 	public void removeBook(String bookId) throws SQLException {
 		String query = "DELETE FROM book WHERE (`bid` = ?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
