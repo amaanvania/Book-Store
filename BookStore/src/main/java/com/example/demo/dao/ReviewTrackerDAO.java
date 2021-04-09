@@ -43,7 +43,7 @@ public class ReviewTrackerDAO {
 
 
     public List<BookReviewTracker> getAllReviewsCombined(){
-        String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, r.rating, r.num_reviews\n" +
+        String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, b.image, r.rating, r.num_reviews\n" +
                 "FROM `4413`.ReviewTracker r \n" +
                 "join `4413`.book b on r.book_id = b.bid;";
 
@@ -51,7 +51,7 @@ public class ReviewTrackerDAO {
     }
 
     public BookReviewTracker getBookReviewsCombined(String bid) throws SQLException {
-        String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, r.rating, r.num_reviews\n" +
+        String strSelect = "SELECT b.bid, b.title, b.price, b.category, b.quantity, b.image, r.rating, r.num_reviews\n" +
                 "FROM `4413`.ReviewTracker r \n" +
                 "join `4413`.book b on r.book_id = b.bid \n" +
                 "WHERE b.bid= ?;";

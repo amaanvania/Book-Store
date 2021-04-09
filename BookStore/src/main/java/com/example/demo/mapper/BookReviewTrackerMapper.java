@@ -16,6 +16,7 @@ public class BookReviewTrackerMapper implements RowMapper<BookReviewTracker> {
         result.setName(rs.getString("title"));
         result.setPrice(rs.getFloat("price"));
         result.setQuantity(rs.getInt("quantity"));
+        result.setImage(rs.getString("image"));
         result.setCategory(rs.getString("category"));
         result.setRating(rs.getFloat("rating"));
         result.setNumReviews(rs.getInt("num_reviews"));
