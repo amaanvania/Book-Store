@@ -43,7 +43,7 @@ public class ReviewTrackerServiceTest {
 
     @Before
     public void setUp() throws SQLException {
-        b1 = new Book("b100","test","",2,"",1);
+        b1 = new Book("b100","test","",2,"",1,"","");
         bd.insertBook(b1);
 
         r1 = new ReviewTracker();
