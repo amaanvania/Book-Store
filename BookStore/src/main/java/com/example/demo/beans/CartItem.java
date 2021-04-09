@@ -38,5 +38,12 @@ public class CartItem implements Serializable {
 	public void setBookQuantity(int bookQuantity) {
 		this.bookQuantity = bookQuantity;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CartItem{" +
+				"bookID='" + bookID + '\'' +
+				", bookQuantity=" + bookQuantity +
+				'}';
+	}
 }
