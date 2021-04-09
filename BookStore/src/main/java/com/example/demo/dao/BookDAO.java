@@ -57,6 +57,10 @@ public class BookDAO {
 		if(books.size() == 0) return null;
 		return books.get(0);
 	}
+
+	public boolean containsBook(String bid){
+		return getBook(bid) != null;
+	}
 	
 	public List<Book> getBooksByCategory(String cat)
 	{
@@ -65,13 +69,16 @@ public class BookDAO {
 	}
 
 	public void insertBook(Book book) throws SQLException {
-		String strSelect  = "INSERT INTO book (bid, title, price, category, quantity) VALUES (?, ?, ?, ?,?);";
+		String strSelect  = "INSERT INTO book (bid, title, price, category, quantity, image, publisher, author) VALUES (?, ?, ?, ?,?,?,?,?);";
 		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(strSelect);
 		preparedStatement.setString(1, book.getId());
 		preparedStatement.setString(2, book.getName());
 		preparedStatement.setFloat(3, book.getPrice());
 		preparedStatement.setString(4, book.getCategory());
 		preparedStatement.setInt(5, book.getQuantity());
+		preparedStatement.setString(6, book.getImage());
+		preparedStatement.setString(7,book.getPublisher());
+		preparedStatement.setString(8,book.getAuthor());
 		preparedStatement.executeUpdate();
 
 		if(!rtd.containsBook(book.getId())){
@@ -89,6 +96,21 @@ public class BookDAO {
 		preparedStatement.setInt(1, quantity);;
 		preparedStatement.setString(2,bid);
 		preparedStatement.execute();
+	}
+
+	public void updateBook(Book b) throws SQLException
+	{
+		String query = "UPDATE `4413`.`book` SET `title` = ?, `price` = ?, `category` = ?, `quantity` = ?, `image` = ?, `publisher` = ?, `author` = ? WHERE (`bid` = ?);";
+		PreparedStatement preparedStatement = jdbc.getDataSource().getConnection().prepareStatement(query);
+		preparedStatement.setString(1,b.getName());
+		preparedStatement.setFloat(2,b.getPrice());
+		preparedStatement.setString(3,b.getCategory());
+		preparedStatement.setInt(4,b.getQuantity());
+		preparedStatement.setString(5,b.getImage());
+		preparedStatement.setString(6,b.getPublisher());
+		preparedStatement.setString(7,b.getAuthor());
+		preparedStatement.setString(8,b.getId());
+		preparedStatement.executeUpdate();
 	}
 
 	public void removeBook(String bookId) throws SQLException {

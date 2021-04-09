@@ -17,6 +17,7 @@ public class BookMapper implements RowMapper<Book> {
 		b.setPrice(rs.getFloat("price"));
 		b.setQuantity(rs.getInt("quantity"));
 		b.setCategory(rs.getString("category"));
+		b.setImage(rs.getString("image"));
 		return b;
 	}
 

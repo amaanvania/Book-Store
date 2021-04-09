@@ -10,18 +10,41 @@ public class Book {
 	private String category;
 	private int quantity;
 
+	private String author;
+
+	private String publisher;
+
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+
+
 	public Book()
 	{
 		this.id = null;
 		this.name = null;
-		this.image = "https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=405&h=540&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2016%2F09%2Fhpsorcstone.jpg";
+		this.image = null;
 		this.price = 0;
 		this.category = null;
 		this.quantity = 0;
 	}
 
 
-	public Book(String id, String name, String image, float price, String category, int quantity) {
+	public Book(String id, String name, String image, float price, String category, int quantity, String author, String publisher) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,6 +52,8 @@ public class Book {
 		this.price = price;
 		this.category = category;
 		this.quantity = quantity;
+		this.author = author;
+		this.publisher = publisher;
 	}
 
 
