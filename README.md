@@ -2,4 +2,7 @@
 
 Front-end implementation can be found [here](https://github.com/amaanvania/Book-Store-Frontend)
 
-https://gyazo.com/eca5d53bb9666ea84857f2a8926182e2
+
+https://user-images.githubusercontent.com/35306464/118228843-dfcfee80-b458-11eb-955e-b2660892a66c.mp4
+
+
