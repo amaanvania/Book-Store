@@ -1,5 +1,17 @@
 # Book-Store Back-End
 
+
+Book-Store created with Spring-Boot & React which supports:
+
+* Account registration and login
+* Password Encryption
+* Priveleges (Admin/Owner/User)
+* Adding, modifying, and removing from Cart
+* Checkout
+* Billing
+
+
+
 Front-end implementation can be found [here](https://github.com/amaanvania/Book-Store-Frontend)
 
 # Demonstration 
