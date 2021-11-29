@@ -1,7 +1,7 @@
-# Book-Store Back-End
+## Book-Store Back-End
 
 
-Book-Store created with Spring-Boot & React which supports:
+This project features an e-commerce Book-Store created with Spring-Boot & React which supports:
 
 * Account registration and login
 * Password Encryption
